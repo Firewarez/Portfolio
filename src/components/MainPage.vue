@@ -24,12 +24,12 @@
         <div id="initializingText" class="initializingText">
             <p>Loading</p>
         </div>
-        
+
         <div class="dot"></div>
         <div class="dot"></div>
         <div class="dot"></div>
 
-        
+
     </div>
 
 
@@ -43,28 +43,47 @@
 
                 </div>
             </div>
+            <div class="txt-portfolio">
+                <a href="#" style="text-decoration: none; color: white;">
+                    <h1>Portfólio</h1>
+                </a>
+            </div>
         </nav>
 
         <div class="first-section">
+
             <div class="aboutme">
-                <div class="abtme-pfp">
-                    <img src="https://avatars.githubusercontent.com/u/72213867?v=4" alt="Profile Picture" />
-                </div>
                 <div class="abtme-info">
+                    <div class="txt" style="color: white;">
+                        <h1 id="txt1">About me</h1>
+                    </div>
                     <div class="abtme-first">
-                        <p id="txt1">Develop web applications to improve communication around the globe.</p>
+                        <p id="txt1"
+                            style="font-size: 25px; font-weight: bold; font-family: Outfit,Arial,Helvetica,sans-serif;">
+                            Arthur Barcelos, Desenvolvedor Web</p>
                     </div>
                     <div class="abtme-second">
-                        <p id="txt2">Arthur Barcelos, FullStack Dev</p>
+                        <p id="txt2" style="font-size: 25px; font-family: Outfit,Arial,Helvetica,sans-serif;">Sou um
+                            desenvolvedor web atuando como freelancer desenvolvendo aplicações interativas e
+                            responsivas, buscando experiências no mercado para melhorar e expandir meu conhecimento</p>
+                    </div>
+                    <div class="abtme-buttons">
+                        <a href="mailto:arthurbarcelospb@hotmail.com" class="btn btn-primary">Contato</a>
+                        <a href="https://github.com/Firewarez" class="btn btn-secondary">Github</a>
                     </div>
                 </div>
+                <div class="abtme-pfp">
+                    <img :src="iconImage" alt="Profile Picture" />
+                </div>
             </div>
+            <div class="topblur"></div>
+            <div class="bottomblur"></div>
 
-            <div class="next-btn">
+            
+        </div>
+        <div class="next-btn">
                 <i class="bi bi-arrow-down-short"></i>
             </div>
-        </div>
-
 
         <div class="second-section">
             <h2>Seção 2</h2>
@@ -79,7 +98,7 @@
 
 
 import 'bootstrap-icons/font/bootstrap-icons.css';
-
+import iconImage from '@/assets/Icon.jpg';
 
 
 
@@ -115,7 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let j = 0;
 
     function typeWriter2() {
-        if (j < txt.length) {
+        if (j < txt2.length) {
             document.getElementById("txt2").innerHTML += txt2.charAt(j);
             j++;
             setTimeout(typeWriter2, speed);
@@ -361,21 +380,55 @@ document.addEventListener('DOMContentLoaded', () => {
 
 .first-section {
     width: 100%;
-    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    z-index: 1;
+    position: relative;
 }
 
+.txt {
+    z-index: 1;
+    width: 100%;
+    padding-bottom: 40px;
+    font-size: 50px;
+}
 
+.topblur {
+    position: absolute;
+    top: 0;
+    width: 50vw;
+    height: 50vw;
+    background: #302b63;
+    filter: blur(100px);
+    top: -135px;
+    left: 1vw;
+    z-index: 0;
+    border-radius: 700px;
+}
+
+.bottomblur{
+    position: absolute;
+    bottom: 0;
+    width: 50vw;
+    height: 50vw;
+    background: #302b63;
+    filter: blur(100px);
+    bottom: -600px;
+    right: 1vw;
+    z-index: 0;
+    border-radius: 700px;
+}
 
 .next-btn {
+    position: relative;
     display: flex;
     justify-content: center;
     margin-top: 20px;
-    font-size: 30px;
+    font-size: 50px;
     color: #00ff00;
+    z-index: 1;
 }
 
 .aboutme {
@@ -386,6 +439,7 @@ document.addEventListener('DOMContentLoaded', () => {
     width: 70%;
     gap: 10px;
     color: white;
+    z-index: 1;
 }
 
 .abtme-info {
@@ -394,11 +448,12 @@ document.addEventListener('DOMContentLoaded', () => {
     gap: 20px;
     right: 0;
     width: 50%;
+    z-index: 1;
 }
 
-.abtme-pfp{
-    width: 420px;
-    height: 100%;
+.abtme-pfp {
+    width: 500px;
+    height: 500px;
     left: 0;
     display: flex;
     justify-content: center;
@@ -408,6 +463,22 @@ document.addEventListener('DOMContentLoaded', () => {
 .abtme-pfp img {
     width: 100%;
     height: 100%;
+    border-radius: 100%;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-20px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
 }
 
 .content {
@@ -416,21 +487,58 @@ document.addEventListener('DOMContentLoaded', () => {
     opacity: 0;
 }
 
-.nav-container{
+.nav-container {
     display: flex;
     flex-direction: column;
     padding: 20px;
 }
 
-.nav-container i{
+.nav-container i {
     cursor: pointer;
     width: 50px;
     height: 50px;
+    transition: transform 0.3s ease;
 }
 
-.nav-container i:hover{
-    border-radius: 50%;
-    background-color: #48494d;
-    opacity: 0.5;
+.nav-container i:hover {
+    transform: scale(1.2);
+}
+
+.abtme-buttons{
+    display: flex;
+    gap: 20px;
+    height: 70px;
+}
+
+.btn{
+    border-radius: 100px;
+    background-color: #3E7B27;
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+    width: 150px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+}
+
+.btn:hover{
+    cursor: pointer;
+    transition: transform 0.3 ease;
+}
+</style>
+
+<style scoped>
+.navbar-content {
+    display: flex;
+    position: relative;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 100px;
+    padding-right: 100px;
+    color: white;
+    z-index: 2;
 }
 </style>
