@@ -36,19 +36,27 @@
         <!-- Conteúdo real da página -->
         <nav class="navbar-content scroll">
             <div class="nav-container" style="color: white; font-size: 50px;">
-                <i class="bi bi-list btn-dropdown"></i>
+                <i class="bi bi-list btn-dropdown shadow"></i>
                 <div class="navbar-dropdown">
                     <ul class="social-links">
-                        <li class="social-link"><a href="#">instagram</a></li>
-                        <li class="social-link"><a href="#">linkedin</a></li>
-                        <li class="social-link"><a href="#">github</a></li>
-                        <li class="social-link"><a href="#">email</a></li>
+                        <li class="social-link"><a href="#"><i class="bi bi-instagram shadow"></i></a></li>
+                        <li class="social-link"><a href="#"><i class="bi bi-linkedin shadow"></i></a></li>
+                        <li class="social-link"><a href="#"><i class="bi bi-github shadow"></i></a></li>
+                        <li class="social-link"><a href="#"><i class="bi bi-envelope shadow"></i></a></li>
                     </ul>
                     <ul class="main-menu-links">
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Sobre</a></li>
-                        <li><a href="#">Projetos</a></li>
-                        <li><a href="#">Contato</a></li>
+                        <li><a href="#">Home</a>
+                            <p>Back to main</p>
+                        </li>
+                        <li><a href="#">Sobre</a>
+                            <p>About my work</p>
+                        </li>
+                        <li><a href="#">Projetos</a>
+                            <p>See projects developed by me</p>
+                        </li>
+                        <li><a href="#">Contato</a>
+                            <p>My contact</p>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -269,6 +277,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
     scrollElements.forEach((element) => {
         observer.observe(element); // Observa cada elemento com a classe .scroll
+    });
+
+    const btnDropdown = document.querySelector('.btn-dropdown');
+    const navbarDropdown = document.querySelector('.navbar-dropdown');
+
+    btnDropdown.addEventListener('click', () => {
+        navbarDropdown.classList.toggle('active');
+        btnDropdown.classList.toggle('active');
+
+        // Alternar entre o ícone de lista e o ícone "X"
+        if (btnDropdown.classList.contains('active')) {
+            btnDropdown.classList.remove('bi-list');
+            btnDropdown.classList.add('bi-x');
+        } else {
+            btnDropdown.classList.remove('bi-x');
+            btnDropdown.classList.add('bi-list');
+        }
     });
 });
 
@@ -885,7 +910,9 @@ document.addEventListener('DOMContentLoaded', () => {
 }
 
 .navbar-dropdown {
-    display: none;
+    visibility: hidden; /* Esconde o elemento, mas mantém no fluxo do documento */
+    opacity: 0; /* Torna o elemento transparente */
+    transition: opacity 0.3s ease, visibility 0.3s ease;
     position: absolute;
     background-color: #2d2a5d;
     -webkit-box-shadow: 2px 7px 5px 7px rgba(0, 0, 0, 0.75);
@@ -897,23 +924,73 @@ document.addEventListener('DOMContentLoaded', () => {
     height: 80vh;
     width: 80vw;
     gap: 50px;
-    padding: 50px;
+    padding-top: 60px;
+    padding-left: 10px;
+}
+
+.navbar-dropdown.active {
+    visibility: visible; /* Torna o elemento visível */
+    opacity: 1; /* Torna o elemento opaco */
+}
+
+.navbar-dropdown ul li {
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Atrasos para cada item */
+.navbar-dropdown.active ul li {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.navbar-dropdown.active ul li:nth-child(1) {
+    transition-delay: 0.3s;
+}
+
+.navbar-dropdown.active ul li:nth-child(2) {
+    transition-delay: 0.4s;
+}
+
+.navbar-dropdown.active ul li:nth-child(3) {
+    transition-delay: 0.5s;
+}
+
+.navbar-dropdown.active ul li:nth-child(4) {
+    transition-delay: 0.6s;
 }
 
 .btn-dropdown:hover .navbar-dropdown {
-    display: flex; /* Exibe o dropdown */
+    display: flex;
+    /* Exibe o dropdown */
+}
+
+.btn-dropdown {
+    transition: transform 0.3s ease;
+}
+
+.btn-dropdown.active {
+    transform: rotate(90deg);
 }
 
 .social-links {
     display: flex;
-    gap: 10px;
+    gap: 30px;
     list-style: none;
     font-size: 35px;
+    border-bottom: 1px solid #797979;
+    align-items: center;
+    padding-bottom: 10px;
 }
 
 .social-links a {
     text-decoration: none;
     color: white;
+}
+
+.social-links a:hover {
+    color: black;
 }
 
 .main-menu-links {
@@ -928,13 +1005,36 @@ document.addEventListener('DOMContentLoaded', () => {
     text-decoration: none;
     color: white;
     font-weight: bold;
+    text-shadow: -3px 5px 2px #000000;
 }
 
 .main-menu-links a:hover {
     color: black;
+    text-shadow: 0px 0px 0px;
+}
+
+.main-menu-links li {
+    display: flex;
+    gap: 60px;
+    align-items: center;
+}
+
+.main-menu-links li p {
+    font-size: 18px;
+    color: #797979;
+    font-weight: normal;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.main-menu-links a {
+    width: 200px;
 }
 
 .btn-dropdown {
     z-index: 3;
+}
+
+.shadow {
+    filter: drop-shadow(4px 4px 4px rgba(0, 0, 0, 0.5));
 }
 </style>
