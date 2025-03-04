@@ -37,9 +37,19 @@
         <nav class="navbar-content scroll">
             <div class="nav-container" style="color: white; font-size: 50px;">
                 <i class="bi bi-list btn-dropdown"></i>
-                <div class="navbar-dropdown" style="display: none;">
-                    <a href="#">Home</a>
-
+                <div class="navbar-dropdown">
+                    <ul class="social-links">
+                        <li class="social-link"><a href="#">instagram</a></li>
+                        <li class="social-link"><a href="#">linkedin</a></li>
+                        <li class="social-link"><a href="#">github</a></li>
+                        <li class="social-link"><a href="#">email</a></li>
+                    </ul>
+                    <ul class="main-menu-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Sobre</a></li>
+                        <li><a href="#">Projetos</a></li>
+                        <li><a href="#">Contato</a></li>
+                    </ul>
                 </div>
             </div>
             <div class="txt-portfolio">
@@ -80,8 +90,75 @@
         <div class="bottomblur"></div>
 
         <div class="second-section">
-            <div class="languages">
+            <div class="project-container scroll">
+                <div class="Ptxtfield">
+                    <h1>Projetos</h1>
+                </div>
+                <div class="project">
+                    <div class="project-info">
+                        <div class="project-header">
+                            <h1>Projeto 1</h1>
+                        </div>
+                        <div class="project-content">
+                            <p>Descrição do projeto 1</p>
+                        </div>
+                        <div class="project-footer">
+                            <a href="#">Ver mais</a>
+                        </div>
+                    </div>
 
+                    <div class="project-img">
+                        <img src="https://via.placeholder.com/150" alt="Project 1" />
+                    </div>
+                </div>
+                <div class="project">
+                    <div class="project-info">
+                        <div class="project-header">
+                            <h1>Projeto 1</h1>
+                        </div>
+                        <div class="project-content">
+                            <p>Descrição do projeto 1</p>
+                        </div>
+                        <div class="project-footer">
+                            <a href="#">Ver mais</a>
+                        </div>
+                    </div>
+
+                    <div class="project-img">
+                        <img src="https://via.placeholder.com/150" alt="Project 1" />
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="third-section">
+            <div class="languages">
+                <div class="lang scroll JS">
+                    <h1>JavaScript</h1>
+
+                </div>
+                <div class="lang scroll TS">
+                    <img align="center" alt="JS" height="60" width="70"
+                        src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg" />
+                </div>
+                <div class="lang scroll Vue">
+                    <h1>Vue.js</h1>
+                </div>
+                <div class="lang scroll React">
+                    <h1>React.js</h1>
+                </div>
+                <div class="lang scroll Laravel">
+                    <h1>Laravel</h1>
+                </div>
+                <div class="lang scroll Python">
+                    <h1>Python</h1>
+                </div>
+                <div class="lang scroll PHP">
+                    <h1>PHP</h1>
+                </div>
+                <div class="lang scroll SQL">
+                    <h1>SQL</h1>
+                </div>
             </div>
         </div>
     </div>
@@ -165,6 +242,34 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     });
+
+
+
+
+    const scrollElements = document.querySelectorAll('.scroll');
+
+    const observer = new IntersectionObserver(
+        (entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    // Quando o elemento entra na viewport
+                    entry.target.classList.add('in-view'); // Adiciona a classe de animação de entrada
+                    entry.target.classList.remove('scroll-animation'); // Remove a classe de animação de saída
+                } else {
+                    // Quando o elemento sai da viewport
+                    entry.target.classList.add('scroll-animation'); // Adiciona a classe de animação de saída
+                    entry.target.classList.remove('in-view'); // Remove a classe de animação de entrada
+                }
+            });
+        },
+        {
+            threshold: 0.5, // Define o ponto em que a animação deve ser ativada (50% visível)
+        }
+    );
+
+    scrollElements.forEach((element) => {
+        observer.observe(element); // Observa cada elemento com a classe .scroll
+    });
 });
 
 
@@ -216,7 +321,7 @@ document.addEventListener('DOMContentLoaded', () => {
     color: red;
 }
 
-.error-red{
+.error-red {
     animation: blinkRed 0.5s ease-in-out;
     border-color: #ff0000;
     color: red;
@@ -541,6 +646,7 @@ document.addEventListener('DOMContentLoaded', () => {
 }
 
 .nav-container {
+    position: relative;
     display: flex;
     flex-direction: column;
     padding: 20px;
@@ -587,13 +693,23 @@ document.addEventListener('DOMContentLoaded', () => {
 .second-section {
     width: 100%;
     height: 100vh;
-    /* Faz a second-section ocupar toda a altura da tela */
+    display: flex;
+    flex-direction: column;
+    color: white;
+}
+
+.third-section {
+    width: 100%;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #1a1a1a;
-    /* Cor de fundo para diferenciar */
+    background-color: #e59393;
     color: white;
+}
+
+.Ptxtfield {
+    padding: 20px;
 }
 </style>
 
@@ -626,20 +742,47 @@ document.addEventListener('DOMContentLoaded', () => {
     flex-direction: column;
 }
 
-@keyframes appear {
-    from {
+@keyframes fadeInScaleUp {
+    0% {
         opacity: 0;
-        translate: -100vw 0;
+        transform: scale(0.5);
     }
 
-    to {
+    100% {
         opacity: 1;
-        translate: 0 0;
+        transform: scale(1);
+    }
+}
+
+@keyframes fadeOutScaleDown {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(0.5);
     }
 }
 
 .scroll {
-    animation: appear 1s;
+    opacity: 0;
+    /* Começa invisível */
+    transform: scale(0.5);
+    /* Começa reduzido */
+    transition: opacity 1s ease, transform 1s ease;
+    /* Transição suave */
+}
+
+.scroll.in-view {
+    animation: fadeInScaleUp 1s ease-in-out forwards;
+    /* Animação de entrada */
+}
+
+.scroll.scroll-animation {
+    animation: fadeOutScaleDown 1s ease-in-out forwards;
+    /* Animação de saída */
 }
 </style>
 
@@ -657,12 +800,9 @@ document.addEventListener('DOMContentLoaded', () => {
     .container {
         padding-top: 0;
         height: 100vh;
-        /* Make the SplashScreen take the full height of the viewport */
         display: flex;
         align-items: center;
-        /* Center vertically */
         justify-content: center;
-        /* Center horizontally */
         position: relative;
         padding-top: 250px;
     }
@@ -681,12 +821,9 @@ document.addEventListener('DOMContentLoaded', () => {
     .container {
         padding-top: 0;
         height: 100vh;
-        /* Make the SplashScreen take the full height of the viewport */
         display: flex;
         align-items: center;
-        /* Center vertically */
         justify-content: center;
-        /* Center horizontally */
         position: relative;
         padding-bottom: 400px;
     }
@@ -717,5 +854,87 @@ document.addEventListener('DOMContentLoaded', () => {
         bottom: -200px;
     }
 
+}
+
+.project-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    z-index: 1;
+}
+
+.project {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    border: 1px solid #cacaca;
+    border-radius: 5px;
+    z-index: 1;
+    width: 100%;
+    cursor: pointer;
+}
+
+.project:hover {
+    transform: scale(1.02);
+    transition: 0.3s;
+}
+
+.navbar-dropdown {
+    display: none;
+    position: absolute;
+    background-color: #2d2a5d;
+    -webkit-box-shadow: 2px 7px 5px 7px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 2px 7px 5px 7px rgba(0, 0, 0, 0.75);
+    box-shadow: 2px 7px 5px 7px rgba(0, 0, 0, 0.75);
+    display: flex;
+    flex-direction: column;
+    z-index: 2;
+    height: 80vh;
+    width: 80vw;
+    gap: 50px;
+    padding: 50px;
+}
+
+.btn-dropdown:hover .navbar-dropdown {
+    display: flex; /* Exibe o dropdown */
+}
+
+.social-links {
+    display: flex;
+    gap: 10px;
+    list-style: none;
+    font-size: 35px;
+}
+
+.social-links a {
+    text-decoration: none;
+    color: white;
+}
+
+.main-menu-links {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    list-style: none;
+    font-size: 40px;
+}
+
+.main-menu-links a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+
+.main-menu-links a:hover {
+    color: black;
+}
+
+.btn-dropdown {
+    z-index: 3;
 }
 </style>
