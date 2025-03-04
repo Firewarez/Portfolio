@@ -1,4 +1,5 @@
 # portfolio
+Meu portfolio que desenvolvi utilizando Vue.js para mostrar meus projetos e minha trajetoria como programador
 
 ## Project setup
 ```

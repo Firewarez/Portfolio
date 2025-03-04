@@ -1,7 +1,7 @@
 <template>
     <div class="SplashScreen" id="splashScreen">
         <div class="container">
-            <div class="txt-container">
+            <div class="txt-container" id="txtContainer">
                 <span id="text">>Terminal</span>
 
             </div>
@@ -20,7 +20,6 @@
     </div>
 
     <div id="loading" style="display: none;" class="loading">
-        <div id="initText" class="initText" style="opacity: hidden;">Almost done!</div>
         <div id="initializingText" class="initializingText">
             <p>Loading</p>
         </div>
@@ -35,7 +34,7 @@
 
     <div id="content" class="content" style="display: none;">
         <!-- Conteúdo real da página -->
-        <nav class="navbar-content">
+        <nav class="navbar-content scroll">
             <div class="nav-container" style="color: white; font-size: 50px;">
                 <i class="bi bi-list btn-dropdown"></i>
                 <div class="navbar-dropdown" style="display: none;">
@@ -44,9 +43,7 @@
                 </div>
             </div>
             <div class="txt-portfolio">
-                <a href="#" style="text-decoration: none; color: white;">
-                    <h1>Portfólio</h1>
-                </a>
+                <h1><a href="mailto:arthurbarcelospb@hotmail.com" class="contact">Contato</a></h1>
             </div>
         </nav>
 
@@ -54,40 +51,38 @@
 
             <div class="aboutme">
                 <div class="abtme-info">
-                    <div class="txt" style="color: white;">
+                    <div class="txt scroll" style="color: white;">
                         <h1 id="txt1">About me</h1>
                     </div>
-                    <div class="abtme-first">
+                    <div class="abtme-first scroll">
                         <p id="txt1"
                             style="font-size: 25px; font-weight: bold; font-family: Outfit,Arial,Helvetica,sans-serif;">
                             Arthur Barcelos, Desenvolvedor Web</p>
                     </div>
-                    <div class="abtme-second">
+                    <div class="abtme-second scroll">
                         <p id="txt2" style="font-size: 25px; font-family: Outfit,Arial,Helvetica,sans-serif;">Sou um
-                            desenvolvedor web atuando como freelancer desenvolvendo aplicações interativas e
-                            responsivas, buscando experiências no mercado para melhorar e expandir meu conhecimento</p>
-                    </div>
-                    <div class="abtme-buttons">
-                        <a href="mailto:arthurbarcelospb@hotmail.com" class="btn btn-primary">Contato</a>
-                        <a href="https://github.com/Firewarez" class="btn btn-secondary">Github</a>
+                            desenvolvedor web independente brasileiro, conecte-se com o mundo na palma da sua mão.
+                            Entenda mais sobre o meu <a href="#" class="trab-btn">Trabalho</a></p>
                     </div>
                 </div>
-                <div class="abtme-pfp">
+                <div class="abtme-pfp scroll">
                     <img :src="iconImage" alt="Profile Picture" />
                 </div>
             </div>
-            <div class="topblur"></div>
-            <div class="bottomblur"></div>
 
-            
+
         </div>
         <div class="next-btn">
-                <i class="bi bi-arrow-down-short"></i>
-            </div>
+            <i class="bi bi-arrow-down-short"></i>
+        </div>
+
+        <div class="topblur"></div>
+        <div class="bottomblur"></div>
 
         <div class="second-section">
-            <h2>Seção 2</h2>
-            <p>Este é o conteúdo da segunda seção.</p>
+            <div class="languages">
+
+            </div>
         </div>
     </div>
 
@@ -108,45 +103,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const loading = document.getElementById('loading');
     const content = document.getElementById('content');
     const firstContainer = document.getElementById('splashScreen');
-    const initText = document.getElementById('initText');
 
-    const txt = document.getElementById('txt1').innerHTML;
-    const txt2 = document.getElementById('txt2').innerHTML;
-    let speed = 10;
-    let i = 0;
-    document.getElementById("txt1").innerHTML = "";
-    document.getElementById("txt2").innerHTML = "";
 
-    async function typeWriter() {
-        return new Promise(resolve => {
-            if (i < txt.length) {
-                document.getElementById("txt1").innerHTML += txt.charAt(i);
-                i++;
-                setTimeout(() => {
-                    typeWriter().then(resolve); // A cada chamada recursiva, garante a execução do resolve quando terminar
-                }, speed);
-            } else {
-                resolve(); // Resolve a Promise quando terminar a digitação
-            }
-        });
-    }
 
-    let j = 0;
+    const nextBtn = document.querySelector('.next-btn');
 
-    function typeWriter2() {
-        if (j < txt2.length) {
-            document.getElementById("txt2").innerHTML += txt2.charAt(j);
-            j++;
-            setTimeout(typeWriter2, speed);
-        }
-    }
+    nextBtn.addEventListener('click', () => {
+        const secondSection = document.querySelector('.second-section');
+        secondSection.scrollIntoView({ behavior: 'smooth' });
+    });
 
-    async function run() {
-        await typeWriter(); // Espera o typeWriter terminar
-        setTimeout(() => {
-            typeWriter2(); // Agora chama o typeWriter2 depois que o primeiro terminar
-        }, 100); // Atraso de 1 segundo
-    }
 
     input.addEventListener('keyup', () => {
         if (input.value.trim() !== '') {
@@ -159,35 +125,44 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     input.addEventListener('keyup', (e) => {
-        if (e.key === 'Enter' && input.value.trim() === 'Start' || input.value.trim() == 'start') {
-            // Exibe a animação de carregamento
-            loading.style.display = 'block';
-            content.style.visibility = 'hidden';
-            content.style.opacity = 0;
-            firstContainer.style.display = 'none'; // Esconde o campo de entrada
-            content.style.display = 'none'; // Exibe o conteúdo real
+        if (e.key === 'Enter') {
+            if (input.value.trim() === 'Start' || input.value.trim() === 'start') {
+                // Exibe a animação de carregamento
+                loading.style.display = 'block';
+                content.style.visibility = 'hidden';
+                content.style.opacity = 0;
+                firstContainer.style.display = 'none'; // Esconde o campo de entrada
+                content.style.display = 'none'; // Esconde o conteúdo real
 
-            // Simula um atraso para a animação de carregamento (ex: 3 segundos)
-            setTimeout(() => {
-                // Exibe a mensagem "Almost done!" com transição suave
-                initText.style.opacity = 1;
-                initText.style.transition = 'opacity 2s ease-in-out'; // Adiciona a transição suave
-            }, 3000); // Atraso de 3 segundos para mostrar a mensagem
-
-            // Após a mensagem "Almost Done" desaparecer, exibe o conteúdo
-            setTimeout(() => {
-                initText.style.opacity = 0; // Esconde o "Almost done!" depois da animação
-
+                // Simula um atraso para a animação de carregamento (ex: 3 segundos)
                 setTimeout(() => {
+                    // Esconde a animação de carregamento e exibe o conteúdo
                     loading.style.display = 'none';
                     content.style.visibility = 'visible';
                     content.style.opacity = 1;
                     content.style.display = 'block';
-                    run(); // Inicia o typewriter do conteúdo
-                }, 1000); // Espera 1 segundo para esconder a mensagem e mostrar o conteúdo
-            }, 5000);  // Atraso de 5 segundos para esconder a mensagem "Almost done!"
-        } else if (e.key === 'Enter' && input.value.trim() !== 'Start') {
-            alert('Digite "Start" para começar');
+                }, 3000); // Atraso de 3 segundos para mostrar o conteúdo
+            } else {
+                // Seleciona o cmd-container
+                const cmdContainer = document.querySelector('.cmd-container');
+                const cmdIcon = document.querySelector('.cmd-label');
+                const cmdInpust = document.querySelector('.cmd-input');
+                const cmdTerm = document.querySelector('.txt-container');
+
+                // Adiciona a classe de erro para ativar a animação
+                cmdContainer.classList.add('error-animation');
+                cmdIcon.classList.add('error-red');
+                cmdInpust.classList.add('error-red');
+                cmdTerm.classList.add('error-animation');
+
+                // Remove a classe de erro após a animação terminar
+                setTimeout(() => {
+                    cmdContainer.classList.remove('error-animation');
+                    cmdIcon.classList.remove('error-red');
+                    cmdInpust.classList.remove('error-red');
+                    cmdTerm.classList.remove('error-animation');
+                }, 1000); // Tempo correspondente à duração da animação
+            }
         }
     });
 });
@@ -197,12 +172,63 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 
 <style scoped>
+@keyframes blinkRed {
+    0% {
+        border-color: #ff0000;
+        color: red;
+    }
+
+    50% {
+        border-color: transparent;
+    }
+
+    100% {
+        border-color: #ff0000;
+        color: red;
+    }
+}
+
+@keyframes shakeHorizontal {
+    0% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-10px);
+    }
+
+    50% {
+        transform: translateX(10px);
+    }
+
+    75% {
+        transform: translateX(-10px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.error-animation {
+    animation: blinkRed 0.5s ease-in-out, shakeHorizontal 0.5s ease-in-out;
+    border-color: #ff0000;
+    color: red;
+}
+
+.error-red{
+    animation: blinkRed 0.5s ease-in-out;
+    border-color: #ff0000;
+    color: red;
+}
+
 .SplashScreen {
     color: white;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
 }
 
 .container {
@@ -381,6 +407,8 @@ document.addEventListener('DOMContentLoaded', () => {
 .first-section {
     width: 100%;
     display: flex;
+    height: 100vh;
+    min-height: 600px;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -408,7 +436,7 @@ document.addEventListener('DOMContentLoaded', () => {
     border-radius: 700px;
 }
 
-.bottomblur{
+.bottomblur {
     position: absolute;
     bottom: 0;
     width: 50vw;
@@ -422,24 +450,48 @@ document.addEventListener('DOMContentLoaded', () => {
 }
 
 .next-btn {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
+    position: absolute;
+    bottom: 20px;
+    /* Posiciona o botão no final da first-section */
+    left: 50%;
+    /* Centraliza horizontalmente */
+    transform: translateX(-50%);
+    /* Ajusta a centralização */
     font-size: 50px;
     color: #00ff00;
     z-index: 1;
+    cursor: pointer;
+    /* Adiciona cursor pointer para indicar que é clicável */
+}
+
+.next-btn i {
+    animation: float 2s ease-in-out infinite;
+    /* Adiciona animação ao ícone */
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
 }
 
 .aboutme {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 20px;
-    width: 70%;
-    gap: 10px;
+    gap: 25px;
     color: white;
     z-index: 1;
+    top: -15%;
+    position: relative;
 }
 
 .abtme-info {
@@ -482,9 +534,10 @@ document.addEventListener('DOMContentLoaded', () => {
 }
 
 .content {
-    transition: all 1 s ease;
+    transition: all 1s ease;
     visibility: hidden;
     opacity: 0;
+    overflow: hidden;
 }
 
 .nav-container {
@@ -504,18 +557,16 @@ document.addEventListener('DOMContentLoaded', () => {
     transform: scale(1.2);
 }
 
-.abtme-buttons{
+.abtme-buttons {
     display: flex;
     gap: 20px;
     height: 70px;
 }
 
-.btn{
-    border-radius: 100px;
-    background-color: #3E7B27;
+.contact {
     text-decoration: none;
     color: white;
-    font-size: 20px;
+    font-size: 25px;
     width: 150px;
     height: 100%;
     display: flex;
@@ -524,9 +575,25 @@ document.addEventListener('DOMContentLoaded', () => {
     font-weight: bold;
 }
 
-.btn:hover{
+.contanct:hover {
+    transition: all .12s cubic-bezier(.25, .46, .45, .94);
+}
+
+.btn:hover {
     cursor: pointer;
     transition: transform 0.3 ease;
+}
+
+.second-section {
+    width: 100%;
+    height: 100vh;
+    /* Faz a second-section ocupar toda a altura da tela */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #1a1a1a;
+    /* Cor de fundo para diferenciar */
+    color: white;
 }
 </style>
 
@@ -540,5 +607,115 @@ document.addEventListener('DOMContentLoaded', () => {
     padding-right: 100px;
     color: white;
     z-index: 2;
+}
+
+.trab-btn {
+    text-decoration: none;
+    color: #a757e3;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.trab-btn:hover {
+    transition: 0.3s;
+    transform: scale(1.2);
+}
+
+.abtme-second {
+    display: flex;
+    flex-direction: column;
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        translate: -100vw 0;
+    }
+
+    to {
+        opacity: 1;
+        translate: 0 0;
+    }
+}
+
+.scroll {
+    animation: appear 1s;
+}
+</style>
+
+<style scoped>
+/* Smartphone css styling area1 */
+
+@media screen and (max-width: 768px) {
+    .navbar-content {
+        padding-left: 20px;
+        padding-right: 20px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .container {
+        padding-top: 0;
+        height: 100vh;
+        /* Make the SplashScreen take the full height of the viewport */
+        display: flex;
+        align-items: center;
+        /* Center vertically */
+        justify-content: center;
+        /* Center horizontally */
+        position: relative;
+        padding-top: 250px;
+    }
+
+}
+
+@media screen and (max-width: 480px) {
+
+    .navbar-content {
+        padding-left: 20px;
+        padding-right: 20px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .container {
+        padding-top: 0;
+        height: 100vh;
+        /* Make the SplashScreen take the full height of the viewport */
+        display: flex;
+        align-items: center;
+        /* Center vertically */
+        justify-content: center;
+        /* Center horizontally */
+        position: relative;
+        padding-bottom: 400px;
+    }
+
+    .txt {
+        font-size: 30px;
+    }
+
+    .aboutme {
+        flex-direction: column;
+        gap: 20px;
+        width: 100%;
+    }
+
+    .abtme-pfp {
+        display: none;
+    }
+
+    .topblur {
+        width: 300px;
+        height: 300px;
+        top: 135px;
+    }
+
+    .bottomblur {
+        width: 300px;
+        height: 300px;
+        bottom: -200px;
+    }
+
 }
 </style>
