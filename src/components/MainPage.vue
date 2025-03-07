@@ -24,10 +24,20 @@
             <p>Loading</p>
         </div>
 
-        <div class="dot"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
-
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+            <circle fill="#FF156D" stroke="#FF156D" stroke-width="15" r="15" cx="40" cy="100">
+                <animate attributeName="opacity" calcMode="spline" dur="2" values="1;0;1;"
+                    keySplines=".5 0 .5 1;.5 0 .5 1" repeatCount="indefinite" begin="-.4"></animate>
+            </circle>
+            <circle fill="#FF156D" stroke="#FF156D" stroke-width="15" r="15" cx="100" cy="100">
+                <animate attributeName="opacity" calcMode="spline" dur="2" values="1;0;1;"
+                    keySplines=".5 0 .5 1;.5 0 .5 1" repeatCount="indefinite" begin="-.2"></animate>
+            </circle>
+            <circle fill="#FF156D" stroke="#FF156D" stroke-width="15" r="15" cx="160" cy="100">
+                <animate attributeName="opacity" calcMode="spline" dur="2" values="1;0;1;"
+                    keySplines=".5 0 .5 1;.5 0 .5 1" repeatCount="indefinite" begin="0"></animate>
+            </circle>
+        </svg>
 
     </div>
 
@@ -70,7 +80,7 @@
             <div class="aboutme">
                 <div class="abtme-info">
                     <div class="txt scroll" style="color: white;">
-                        <h1 id="txt1">About me</h1>
+                        <h1 id="txt1" style="text-shadow: -3px 5px 2px #000000;">About me</h1>
                     </div>
                     <div class="abtme-first scroll">
                         <p id="txt1"
@@ -78,8 +88,8 @@
                             Arthur Barcelos, Desenvolvedor Web</p>
                     </div>
                     <div class="abtme-second scroll">
-                        <p id="txt2" style="font-size: 25px; font-family: Outfit,Arial,Helvetica,sans-serif;">Sou um
-                            desenvolvedor web independente brasileiro, conecte-se com o mundo na palma da sua mão.
+                        <p id="txt2" style="font-size: 25px; font-family: Outfit,Arial,Helvetica,sans-serif;">
+                            Desenvolvedor web brasileiro. Construo aplicações para aproximar pessoas.
                             Entenda mais sobre o meu <a href="#" class="trab-btn">Trabalho</a></p>
                     </div>
                 </div>
@@ -94,8 +104,7 @@
             <i class="bi bi-arrow-down-short"></i>
         </div>
 
-        <div class="topblur"></div>
-        <div class="bottomblur"></div>
+        
 
         <div class="second-section">
             <div class="project-container scroll">
@@ -398,7 +407,7 @@ document.addEventListener('DOMContentLoaded', () => {
 }
 
 .cmd-input {
-    background-color: #17153B;
+    background-color: transparent;
     color: #00ff00;
     border: none;
     padding: 10px;
@@ -462,54 +471,6 @@ document.addEventListener('DOMContentLoaded', () => {
     color: #00ff00;
 }
 
-.dot {
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    margin: 0 5px;
-    border-radius: 50%;
-    background-color: #00ff00;
-    /* Cor do ponto */
-    opacity: 0;
-    /* Começa invisível */
-    animation: blink 1.5s infinite;
-    /* Animação de piscar */
-}
-
-/* Efeito de piscar para criar os pontos */
-@keyframes blink {
-    0% {
-        opacity: 0;
-    }
-
-    33% {
-        opacity: 1;
-    }
-
-    66% {
-        opacity: 0;
-    }
-
-    100% {
-        opacity: 1;
-    }
-}
-
-/* Animação para alternar a visibilidade dos pontos */
-.dot:nth-child(1) {
-    animation-delay: 0s;
-    /* Primeiro ponto */
-}
-
-.dot:nth-child(2) {
-    animation-delay: 0.5s;
-    /* Segundo ponto */
-}
-
-.dot:nth-child(3) {
-    animation-delay: 1s;
-    /* Terceiro ponto */
-}
 
 #initializingText {
     font-family: 'Courier New', Courier, monospace;
@@ -553,31 +514,7 @@ document.addEventListener('DOMContentLoaded', () => {
     font-size: 50px;
 }
 
-.topblur {
-    position: absolute;
-    top: 0;
-    width: 50vw;
-    height: 50vw;
-    background: #302b63;
-    filter: blur(100px);
-    top: -135px;
-    left: 1vw;
-    z-index: 0;
-    border-radius: 700px;
-}
 
-.bottomblur {
-    position: absolute;
-    bottom: 0;
-    width: 50vw;
-    height: 50vw;
-    background: #302b63;
-    filter: blur(100px);
-    bottom: -600px;
-    right: 1vw;
-    z-index: 0;
-    border-radius: 700px;
-}
 
 .next-btn {
     position: absolute;
@@ -634,8 +571,8 @@ document.addEventListener('DOMContentLoaded', () => {
 }
 
 .abtme-pfp {
-    width: 500px;
-    height: 500px;
+    width: 400px;
+    height: 400px;
     left: 0;
     display: flex;
     justify-content: center;
@@ -645,7 +582,6 @@ document.addEventListener('DOMContentLoaded', () => {
 .abtme-pfp img {
     width: 100%;
     height: 100%;
-    border-radius: 100%;
     animation: float 3s ease-in-out infinite;
 }
 
@@ -655,7 +591,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     50% {
-        transform: translateY(-20px);
+        transform: translateY(-5px);
     }
 
     100% {
@@ -867,17 +803,7 @@ document.addEventListener('DOMContentLoaded', () => {
         display: none;
     }
 
-    .topblur {
-        width: 300px;
-        height: 300px;
-        top: 135px;
-    }
-
-    .bottomblur {
-        width: 300px;
-        height: 300px;
-        bottom: -200px;
-    }
+    
 
 }
 
@@ -910,8 +836,10 @@ document.addEventListener('DOMContentLoaded', () => {
 }
 
 .navbar-dropdown {
-    visibility: hidden; /* Esconde o elemento, mas mantém no fluxo do documento */
-    opacity: 0; /* Torna o elemento transparente */
+    visibility: hidden;
+    /* Esconde o elemento, mas mantém no fluxo do documento */
+    opacity: 0;
+    /* Torna o elemento transparente */
     transition: opacity 0.3s ease, visibility 0.3s ease;
     position: absolute;
     background-color: #2d2a5d;
@@ -929,8 +857,10 @@ document.addEventListener('DOMContentLoaded', () => {
 }
 
 .navbar-dropdown.active {
-    visibility: visible; /* Torna o elemento visível */
-    opacity: 1; /* Torna o elemento opaco */
+    visibility: visible;
+    /* Torna o elemento visível */
+    opacity: 1;
+    /* Torna o elemento opaco */
 }
 
 .navbar-dropdown ul li {
@@ -1038,3 +968,5 @@ document.addEventListener('DOMContentLoaded', () => {
     filter: drop-shadow(4px 4px 4px rgba(0, 0, 0, 0.5));
 }
 </style>
+
+<style scoped></style>
