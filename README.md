@@ -1,5 +1,7 @@
 # portfolio
-Meu portfolio que desenvolvi utilizando Vue.js para mostrar meus projetos e minha trajetoria como programador
+Meu portfolio que desenvolvi utilizando Vue, Tailwind CSS para mostrar meus 
+projetos e minha trajetoria como desenvolvedor de software
+Inclui projetos web, minha apresentação, aplicativos desenvolvidos em Java, C, Python
 
 ## Project setup
 ```

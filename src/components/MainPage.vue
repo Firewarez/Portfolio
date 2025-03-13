@@ -47,21 +47,23 @@
         <nav class="navbar-content scroll">
             <div class="nav-container" style="color: white; font-size: 50px;">
                 <i class="bi bi-list btn-dropdown shadow"></i>
+                <i class="bi bi-brightness-high shadow" id="togglemode"></i>
+
                 <div class="navbar-dropdown">
                     <ul class="social-links">
-                        <li class="social-link"><a href="#"><i class="bi bi-instagram shadow"></i></a></li>
-                        <li class="social-link"><a href="#"><i class="bi bi-linkedin shadow"></i></a></li>
-                        <li class="social-link"><a href="#"><i class="bi bi-github shadow"></i></a></li>
-                        <li class="social-link"><a href="#"><i class="bi bi-envelope shadow"></i></a></li>
+                        <li class="social-link"><a href="https://www.instagram.com/arthurbarcelos1/"><i class="bi bi-instagram shadow"></i></a></li>
+                        <li class="social-link"><a href="https://www.linkedin.com/in/arthur-barcelos-279b202b0/"><i class="bi bi-linkedin shadow"></i></a></li>
+                        <li class="social-link"><a href="https://github.com/Firewarez"><i class="bi bi-github shadow"></i></a></li>
+                        <li class="social-link"><a href="mailto:arthurbarcelospb@hotmail.com"><i class="bi bi-envelope shadow"></i></a></li>
                     </ul>
                     <ul class="main-menu-links">
-                        <li><a href="#">Home</a>
+                        <li><a href="#first">Home</a>
                             <p>Back to main</p>
                         </li>
-                        <li><a href="#">Sobre</a>
+                        <li><a href="#secondSection">Sobre</a>
                             <p>About my work</p>
                         </li>
-                        <li><a href="#">Projetos</a>
+                        <li><a href="#thrid">Projetos</a>
                             <p>See projects developed by me</p>
                         </li>
                         <li><a href="#">Contato</a>
@@ -69,13 +71,14 @@
                         </li>
                     </ul>
                 </div>
+
             </div>
             <div class="txt-portfolio">
                 <h1><a href="mailto:arthurbarcelospb@hotmail.com" class="contact">Contato</a></h1>
             </div>
         </nav>
 
-        <div class="first-section">
+        <div class="first-section" id="first">
 
             <div class="aboutme">
                 <div class="abtme-info">
@@ -102,11 +105,11 @@
 
         </div>
         <div class="next-btn">
-            <i class="bi bi-arrow-down-short"></i>
+            <i class="bi bi-chevron-compact-down"></i>
         </div>
 
 
-        <div class="second-section">
+        <div class="second-section" id="secondSection">
             <div class="element1">
                 <div class="content1">
                     <h1>Coding</h1>
@@ -184,7 +187,8 @@
                 </div>
                 <div class="content2">
                     <p>Desenvolvo aplicações interativas com <span class="colorTxt">praticidade</span> e <span
-                            class="colorTxt">segurança</span>, entregando com eficiêncica produtos para o seu negócio </p>
+                            class="colorTxt">segurança</span>, entregando com eficiêncica produtos para o seu negócio
+                    </p>
                 </div>
             </div>
             <div class="element2">
@@ -317,7 +321,7 @@
             </div>
 
         </div>
-        <div class="third-section">
+        <div class="third-section" id="third">
             <div class="project-container scroll">
                 <div class="Ptxtfield">
                     <h1>Projetos</h1>
@@ -359,7 +363,7 @@
 
             </div>
         </div>
-        <div class="fourth-section">
+        <div class="fourth-section" id="fourth">
             <div class="languages">
                 <div class="lang scroll JS">
                     <h1>JavaScript</h1>
@@ -408,6 +412,41 @@ document.addEventListener('DOMContentLoaded', () => {
     const loading = document.getElementById('loading');
     const content = document.getElementById('content');
     const firstContainer = document.getElementById('splashScreen');
+    const togglemode = document.getElementById('togglemode');
+
+    togglemode.addEventListener('click', () => {
+        const body = document.body;
+        const secondSection = document.getElementById('secondSection');
+        const nextBtn = document.querySelector('.next-btn');
+        const dropdown = document.querySelector('.navbar-dropdown');
+
+        if (togglemode.classList.contains('bi-brightness-high')) {
+            togglemode.classList.remove('bi-brightness-high');
+            togglemode.classList.add('bi-moon');
+            togglemode.style.transform = 'rotate(360deg)';
+
+            body.style.backgroundColor = '#333240';
+            body.style.backgroundImage = `url("data:image/svg+xml,%3Csvg width='52' height='26' viewBox='0 0 52 26' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%238f88a1' fill-opacity='0.4'%3E%3Cpath d='M10 10c0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6h2c0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4v2c-3.314 0-6-2.686-6-6 0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6zm25.464-1.95l8.486 8.486-1.414 1.414-8.486-8.486 1.414-1.414z' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`;
+            secondSection.style.backgroundColor = '#333240';
+            secondSection.style.backgroundColor = `url("data:image/svg+xml,%3Csvg width='40' height='1' viewBox='0 0 40 1' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h20v1H0z' fill='%238f88a1' fill-opacity='0.4' fill-rule='evenodd'/%3E%3C/svg%3E")`;
+            nextBtn.style.color = 'white';
+            dropdown.style.backgroundColor = '#333240';
+
+
+        } else {
+            togglemode.classList.remove('bi-moon');
+            togglemode.classList.add('bi-brightness-high');
+            togglemode.style.transform = 'rotate(0deg)';
+
+            body.style.backgroundColor = '#DFDBE5';
+            body.style.backgroundImage = `url("data:image/svg+xml,%3Csvg width='52' height='26' viewBox='0 0 52 26' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.4'%3E%3Cpath d='M10 10c0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6h2c0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4v2c-3.314 0-6-2.686-6-6 0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6zm25.464-1.95l8.486 8.486-1.414 1.414-8.486-8.486 1.414-1.414z' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`;
+
+            secondSection.style.backgroundColor = '#dfdbe5';
+            secondSection.style.backgroundColor = `url("data:image/svg+xml,%3Csvg width='40' height='1' viewBox='0 0 40 1' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h20v1H0z' fill='%239C92AC' fill-opacity='0.4' fill-rule='evenodd'/%3E%3C/svg%3E")`;
+            dropdown.style.backgroundColor = '#dfdbe5';
+            nextBtn.style.color = '#444444';
+        }
+    });
 
 
 
@@ -430,6 +469,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     input.addEventListener('keyup', (e) => {
+        const body = document.body;
+
         if (e.key === 'Enter') {
             if (input.value.trim() === 'Start' || input.value.trim() === 'start') {
                 // Exibe a animação de carregamento
@@ -446,6 +487,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     content.style.visibility = 'visible';
                     content.style.opacity = 1;
                     content.style.display = 'block';
+                    body.style.backgroundColor = '#DFDBE5';
+                    body.style.backgroundImage = `url("data:image/svg+xml,%3Csvg width='52' height='26' viewBox='0 0 52 26' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.4'%3E%3Cpath d='M10 10c0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6h2c0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4v2c-3.314 0-6-2.686-6-6 0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6zm25.464-1.95l8.486 8.486-1.414 1.414-8.486-8.486 1.414-1.414z' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`;
                 }, 3000); // Atraso de 3 segundos para mostrar o conteúdo
             } else {
                 // Seleciona o cmd-container
@@ -732,37 +775,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
 .next-btn {
     position: absolute;
+    display: flex;
     bottom: 20px;
-    /* Posiciona o botão no final da first-section */
     left: 50%;
-    /* Centraliza horizontalmente */
     transform: translateX(-50%);
-    /* Ajusta a centralização */
     font-size: 50px;
-    color: #00ff00;
+    color: #444444;
     z-index: 1;
     cursor: pointer;
-    /* Adiciona cursor pointer para indicar que é clicável */
 }
 
-.next-btn i {
-    animation: float 2s ease-in-out infinite;
-    /* Adiciona animação ao ícone */
+
+.next-btn i:hover {
+    transform: scale(1.2);
+    transition: 1s;
 }
 
-@keyframes float {
-    0% {
-        transform: translateY(0);
-    }
-
-    50% {
-        transform: translateY(-10px);
-    }
-
-    100% {
-        transform: translateY(0);
-    }
-}
 
 .aboutme {
     display: flex;
@@ -823,20 +851,51 @@ document.addEventListener('DOMContentLoaded', () => {
 .nav-container {
     position: relative;
     display: flex;
-    flex-direction: column;
+    gap: 20px;
     padding: 20px;
 }
 
-.nav-container i {
-    cursor: pointer;
+.btn-dropdown,
+#togglemode {
     width: 50px;
     height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
     transition: transform 0.3s ease;
 }
 
-.nav-container i:hover {
-    transform: scale(1.2);
+.btn-dropdown {
+    width: 50px;
+    height: 50px;
 }
+
+.btn-dropdown:hover,
+#togglemode:hover {
+    transform: scale(1.1);
+}
+
+#togglemode {
+    width: 45px;
+    height: 45px;
+    font-size: 37px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+#togglemode:hover {
+    transform: scale(1.1);
+    /* Efeito de escala ao passar o mouse */
+}
+
+
+
+
+
+
 
 .abtme-buttons {
     display: flex;
@@ -982,7 +1041,19 @@ document.addEventListener('DOMContentLoaded', () => {
         padding-top: 250px;
     }
 
+    #togglemode {
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+    }
+
+    .btn-dropdown {
+        width: 40px;
+        height: 40px;
+    }
 }
+
+
 
 @media screen and (max-width: 480px) {
 
@@ -1017,7 +1088,16 @@ document.addEventListener('DOMContentLoaded', () => {
         display: none;
     }
 
+    #togglemode {
+        width: 35px;
+        height: 35px;
+        font-size: 18px;
+    }
 
+    .btn-dropdown {
+        width: 35px;
+        height: 35px;
+    }
 
 }
 
@@ -1196,7 +1276,7 @@ document.addEventListener('DOMContentLoaded', () => {
     align-items: center;
 }
 
-.colorTxt{
+.colorTxt {
     color: #a757e3;
 }
 
@@ -1206,7 +1286,7 @@ document.addEventListener('DOMContentLoaded', () => {
     gap: 200px;
 }
 
-.content3{
+.content3 {
     width: 450.2px;
     height: 398.278px;
     position: relative;
@@ -1223,7 +1303,7 @@ document.addEventListener('DOMContentLoaded', () => {
     font-size: 28px;
 }
 
-.content3 h1{
+.content3 h1 {
     font-family: Mosk, sans-serif;
     text-shadow: 0 1px 0 #CCCCCC, 0 2px 0 #c9c9c9, 0 3px 0 #bbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaa, 0 6px 1px rgba(0, 0, 0, .1), 0 0 5px rgba(0, 0, 0, .1), 0 1px 3px rgba(0, 0, 0, .3), 0 3px 5px rgba(0, 0, 0, .2), 0 5px 10px rgba(0, 0, 0, .25), 0 10px 10px rgba(0, 0, 0, .2), 0 20px 20px rgba(0, 0, 0, .15);
 }
