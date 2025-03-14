@@ -515,7 +515,7 @@
                     </div>
 
                     <div class="submit-botao">
-                        <button type="submit" >{{ t('Contact.Submit') }}</button>
+                        <button type="submit">{{ t('Contact.Submit') }}</button>
                     </div>
                 </form>
             </div>
