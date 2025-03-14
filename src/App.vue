@@ -7,6 +7,8 @@
 import MainPage from './components/MainPage.vue'
 import 'bootstrap-icons/font/bootstrap-icons.css'
 
+
+
 </script>
 
 <style>
