@@ -21,7 +21,9 @@ const languages = {
         Projects:{
             UnpAbout: 'Um fórum de notícias desenvolvido na faculdade com objetivo de criar um ambiente conectado de alunos para criação de perguntas, gerar engajamento e aproximação da comunidade estudantil',
             UnpAbout2: 'Possui funções de comunicação de posts, comentários, noticias e perfil de usuário',
-            UnpAbout3: 'Desenvolvido utilizando HTML, CSS, JavaScript, PHP e MySQL'
+            UnpAbout3: 'Desenvolvido utilizando HTML, CSS, JavaScript, PHP e MySQL',
+            Portfolio: 'Meu portfolio que desenvolvi para mostrar alguns de meus projetos e habilidades. Site responsivo e com animações.',
+            Portfolio2: 'Utilizei Vue.js, HTML, CSS e JavaScript.',
         },
         Contact:{
             Header: 'Entre em contato',
@@ -44,7 +46,9 @@ const languages = {
         Projects:{
             UnpAbout: 'A news forum developed at the college with the aim of creating a connected environment for students to ask questions, generate engagement and bring the student community closer together.',
             UnpAbout2: 'It has functions for communicating posts, comments, news and user profiles.',
-            UnpAbout3: 'Developed using HTML, CSS, JavaScript, PHP and MySQL'
+            UnpAbout3: 'Developed using HTML, CSS, JavaScript, PHP and MySQL',
+            Portfolio: 'My portfolio that I developed to show some of my projects and skills. Responsive site with animations.',
+            Portfolio2: 'I used Vue.js, HTML, CSS and JavaScript.',
         },
         Contact:{
             Header: 'Contact me',
