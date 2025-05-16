@@ -24,6 +24,8 @@ const languages = {
             UnpAbout3: 'Desenvolvido utilizando HTML, CSS, JavaScript, PHP e MySQL',
             Portfolio: 'Meu portfolio que desenvolvi para mostrar alguns de meus projetos e habilidades. Site responsivo e com animações.',
             Portfolio2: 'Utilizei Vue.js, HTML, CSS e JavaScript.',
+            Clicker: 'Um jogo de de clicker simples para testar lógica de javascript e brincar com minha criatividade.',
+            Clicker2: 'Desenvolvido de forma simples utilizando apenas HTML, CSS e JavaScript.',
         },
         Contact:{
             Header: 'Entre em contato',
@@ -49,6 +51,9 @@ const languages = {
             UnpAbout3: 'Developed using HTML, CSS, JavaScript, PHP and MySQL',
             Portfolio: 'My portfolio that I developed to show some of my projects and skills. Responsive site with animations.',
             Portfolio2: 'I used Vue.js, HTML, CSS and JavaScript.',
+            Clicker: 'A simple clicker game to test javascript logic and play with my creativity.',
+            Clicker2: 'Developed using only HTML, CSS and JavaScript.',
+            
         },
         Contact:{
             Header: 'Contact me',
