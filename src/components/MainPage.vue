@@ -745,7 +745,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const dropdown = document.querySelector('.navbar-dropdown');
         const paragraphs = document.querySelectorAll('.XD');
         const UpText = document.querySelectorAll('.Joj');
-        
+
         const headerContact = document.getElementById('headerC');
         const abtTxt = document.querySelectorAll('.txt1');
 
@@ -767,7 +767,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 abt.style.textShadow = 'none';
             })
 
-            
+
 
 
             body.style.backgroundColor = '#333240';
@@ -802,7 +802,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 abt.style.textShadow = '1px 0px 1px #CCCCCC, 0px 1px 1px #EEEEEE, 2px 1px 1px #CCCCCC, 1px 2px 1px #EEEEEE, 3px 2px 1px #CCCCCC, 2px 3px 1px #EEEEEE, 4px 3px 1px #CCCCCC, 3px 4px 1px #EEEEEE, 5px 4px 1px #CCCCCC, 4px 5px 1px #EEEEEE, 6px 5px 1px #CCCCCC, 5px 6px 1px #EEEEEE, 7px 6px 1px #CCCCCC';
             })
 
-           
+
 
             thirdSection.style.backgroundColor = '#DFDBE5';
             secondSection.style.backgroundColor = '#dfdbe5';
@@ -922,7 +922,25 @@ document.addEventListener('DOMContentLoaded', () => {
             btnDropdown.classList.add('bi-list');
         }
     });
+
+    const observador2 = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            } else {
+                entry.target.classList.remove('visible');
+            }
+        });
+    });
+
+    document.querySelectorAll('.element-container').forEach((caixa) => {
+        observador2.observe(caixa);
+    });
+
+
+
 });
+
 
 
 
@@ -1362,7 +1380,7 @@ document.addEventListener('DOMContentLoaded', () => {
 @keyframes fadeInScaleUp {
     0% {
         opacity: 0;
-        transform: scale(0.5);
+        transform: scale(0.4);
     }
 
     100% {
@@ -1379,16 +1397,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     100% {
         opacity: 0;
-        transform: scale(0.5);
+        transform: scale(0.4);
     }
 }
 
 .scroll {
     opacity: 0;
     /* Começa invisível */
-    transform: scale(0.5);
+    transform: scale(0.4);
     /* Começa reduzido */
-    transition: opacity 1s ease, transform 1s ease;
+    transition: opacity 1s ease, transform 0.4s ease;
     /* Transição suave */
 }
 
@@ -1547,15 +1565,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
 .navbar-dropdown {
     visibility: hidden;
-    /* Esconde o elemento, mas mantém no fluxo do documento */
     opacity: 0;
-    /* Torna o elemento transparente */
-    transition: opacity 0.3s ease, visibility 0.3s ease;
+    transform: scale(0);
+    transform-origin: top left;
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
     position: absolute;
     background-color: #DFDBE5;
-    -webkit-box-shadow: 2px 7px 5px 7px rgba(0, 0, 0, 0.75);
-    -moz-box-shadow: 2px 7px 5px 7px rgba(0, 0, 0, 0.75);
-    box-shadow: 2px 7px 5px 7px rgba(0, 0, 0, 0.75);
+    box-shadow: 12px 17px 51px rgba(0, 0, 0, 0.22);
+    border-radius: 17px;
+    border: 1px solid white;
     display: flex;
     flex-direction: column;
     z-index: 2;
@@ -1568,9 +1586,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 .navbar-dropdown.active {
     visibility: visible;
-    /* Torna o elemento visível */
     opacity: 1;
-    /* Torna o elemento opaco */
+    transform: scale(1);
 }
 
 .navbar-dropdown ul li {
@@ -1828,10 +1845,19 @@ document.addEventListener('DOMContentLoaded', () => {
 }
 
 .element-container {
+    opacity: 0;
+    transform: scale(0);
+    transition: transform 0.4s ease, opacity 0.4s ease;
     color: white;
     position: relative;
     font-family: sans-serif;
     min-width: 63vw;
+    transform-origin: center;
+}
+
+.element-container.visible {
+    transform: scale(1);
+    opacity: 1;
 }
 
 .element-container::before,
@@ -1853,9 +1879,7 @@ document.addEventListener('DOMContentLoaded', () => {
     backdrop-filter: blur(20px);
     border-radius: 0.7rem;
     transition: all ease 0.3s;
-    box-shadow: 0px 5px 20px 7px rgba(0, 0, 0, 0.43);
-    -webkit-box-shadow: 0px 5px 20px 7px rgba(0, 0, 0, 0.43);
-    -moz-box-shadow: 0px 5px 20px 7px rgba(0, 0, 0, 0.43);
+    box-shadow: 12px 17px 51px rgba(0, 0, 0, 0.22);
 }
 
 .element-container .box {
