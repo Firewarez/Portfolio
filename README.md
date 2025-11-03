@@ -1,8 +1,7 @@
 # portfolio
-Meu portfolio que desenvolvi utilizando Vue, Tailwind CSS para mostrar meus 
-projetos e minha trajetoria como desenvolvedor de software
-Inclui projetos web, minha apresentação, aplicativos desenvolvidos em Java, C, Python
-Possui tradução para dois idiomas (PT/EN)
+My portfolio, which I developed using Vue and UI libraries to showcase my projects and my journey as a web developer.
+
+Includes web projects, my presentation, and applications developed in Java, Javascript, and Typescript.
 
 ## Project setup
 ```
