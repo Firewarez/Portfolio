@@ -683,6 +683,9 @@
                 </form>
             </div>
         </div>
+
+        
+
     </div>
 
 
@@ -957,9 +960,11 @@ document.addEventListener('DOMContentLoaded', () => {
         border-color: #ff0000;
         color: red;
     }
+
     50% {
         border-color: transparent;
     }
+
     100% {
         border-color: #ff0000;
         color: red;
@@ -967,18 +972,40 @@ document.addEventListener('DOMContentLoaded', () => {
 }
 
 @keyframes shakeHorizontal {
-    0% { transform: translateX(0); }
-    25% { transform: translateX(-10px); }
-    50% { transform: translateX(10px); }
-    75% { transform: translateX(-10px); }
-    100% { transform: translateX(0); }
+    0% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-10px);
+    }
+
+    50% {
+        transform: translateX(10px);
+    }
+
+    75% {
+        transform: translateX(-10px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
 }
 
 /* Animação flutuante para imagem */
 @keyframes float {
-    0% { transform: translateY(0); }
-    50% { transform: translateY(-5px); }
-    100% { transform: translateY(0); }
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-5px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
 }
 </style>
 
@@ -1294,6 +1321,160 @@ document.addEventListener('DOMContentLoaded', () => {
 .Ptxtfield {
     padding: 20px;
 }
+
+/* From Uiverse.io by Randdose */
+
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    font-family: inherit;
+    gap: 10px;
+    padding-inline: 2em;
+    padding-bottom: 0.4em;
+    background-color: #171717;
+    background-color: #0a192f;
+    border-radius: 20px;
+}
+
+.form-heading {
+    text-align: center;
+    margin: 2em;
+    color: #64ffda;
+    font-size: 1.2em;
+    background-color: transparent;
+    align-self: center;
+}
+
+.form-field {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+    border-radius: 10px;
+    padding: 0.6em;
+    border: none;
+    outline: none;
+    color: white;
+    background-color: #171717;
+    box-shadow: inset 2px 5px 10px rgb(5, 5, 5);
+}
+
+.input-field {
+    background: none;
+    border: none;
+    outline: none;
+    width: 100%;
+    color: #ccd6f6;
+    padding-inline: 1em;
+}
+
+.sendMessage-btn {
+    cursor: pointer;
+    margin-bottom: 3em;
+    padding: 1em;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    color: #64ffda;
+    font-weight: bold;
+    outline: 1px solid #64ffda;
+    transition: all ease-in-out 0.3s;
+}
+
+.sendMessage-btn:hover {
+    transition: all ease-in-out 0.3s;
+    background-color: #64ffda;
+    color: #000;
+    cursor: pointer;
+    box-shadow: inset 2px 5px 10px rgb(5, 5, 5);
+}
+
+.form-card1 {
+    background-image: linear-gradient(163deg, #64ffda 0%, #64ffda 100%);
+    border-radius: 22px;
+    transition: all 0.3s;
+}
+
+.form-card1:hover {
+    box-shadow: 0px 0px 30px 1px rgba(100, 255, 218, 0.3);
+}
+
+.form-card2 {
+    border-radius: 0;
+    transition: all 0.2s;
+}
+
+.form-card2:hover {
+    transform: scale(0.98);
+    border-radius: 20px;
+}
+
+.button {
+    all: unset;
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 0.6em 2em;
+    border: mediumspringgreen solid 0.15em;
+    border-radius: 0.25em;
+    color: mediumspringgreen;
+    font-size: 1.5em;
+    font-weight: 600;
+    cursor: pointer;
+    overflow: hidden;
+    transition: border 300ms, color 300ms;
+    user-select: none;
+}
+
+.button p {
+    z-index: 1;
+}
+
+.button:hover {
+    color: #212121;
+}
+
+.button:active {
+    border-color: teal;
+}
+
+.button::after,
+.button::before {
+    content: "";
+    position: absolute;
+    width: 9em;
+    aspect-ratio: 1;
+    background: mediumspringgreen;
+    opacity: 50%;
+    border-radius: 50%;
+    transition: transform 500ms, background 300ms;
+}
+
+.button::before {
+    left: 0;
+    transform: translateX(-8em);
+}
+
+.button::after {
+    right: 0;
+    transform: translateX(8em);
+}
+
+.button:hover:before {
+    transform: translateX(-1em);
+}
+
+.button:hover:after {
+    transform: translateX(1em);
+}
+
+.button:active:before,
+.button:active:after {
+    background: teal;
+}
 </style>
 
 <style scoped>
@@ -1519,10 +1700,21 @@ document.addEventListener('DOMContentLoaded', () => {
     transform: translateY(0);
 }
 
-.navbar-dropdown.active ul li:nth-child(1) { transition-delay: 0.3s; }
-.navbar-dropdown.active ul li:nth-child(2) { transition-delay: 0.4s; }
-.navbar-dropdown.active ul li:nth-child(3) { transition-delay: 0.5s; }
-.navbar-dropdown.active ul li:nth-child(4) { transition-delay: 0.6s; }
+.navbar-dropdown.active ul li:nth-child(1) {
+    transition-delay: 0.3s;
+}
+
+.navbar-dropdown.active ul li:nth-child(2) {
+    transition-delay: 0.4s;
+}
+
+.navbar-dropdown.active ul li:nth-child(3) {
+    transition-delay: 0.5s;
+}
+
+.navbar-dropdown.active ul li:nth-child(4) {
+    transition-delay: 0.6s;
+}
 
 /* Botão dropdown */
 .btn-dropdown {
@@ -1908,83 +2100,235 @@ document.addEventListener('DOMContentLoaded', () => {
 
 /* Animações da bola */
 @keyframes ball624 {
-    0% { transform: translate(0, 0); }
-    5% { transform: translate(8px, -14px); }
-    10% { transform: translate(15px, -10px); }
-    17% { transform: translate(23px, -24px); }
-    20% { transform: translate(30px, -20px); }
-    27% { transform: translate(38px, -34px); }
-    30% { transform: translate(45px, -30px); }
-    37% { transform: translate(53px, -44px); }
-    40% { transform: translate(60px, -40px); }
-    50% { transform: translate(60px, 0); }
-    57% { transform: translate(53px, -14px); }
-    60% { transform: translate(45px, -10px); }
-    67% { transform: translate(37px, -24px); }
-    70% { transform: translate(30px, -20px); }
-    77% { transform: translate(22px, -34px); }
-    80% { transform: translate(15px, -30px); }
-    87% { transform: translate(7px, -44px); }
-    90% { transform: translate(0, -40px); }
-    100% { transform: translate(0, 0); }
+    0% {
+        transform: translate(0, 0);
+    }
+
+    5% {
+        transform: translate(8px, -14px);
+    }
+
+    10% {
+        transform: translate(15px, -10px);
+    }
+
+    17% {
+        transform: translate(23px, -24px);
+    }
+
+    20% {
+        transform: translate(30px, -20px);
+    }
+
+    27% {
+        transform: translate(38px, -34px);
+    }
+
+    30% {
+        transform: translate(45px, -30px);
+    }
+
+    37% {
+        transform: translate(53px, -44px);
+    }
+
+    40% {
+        transform: translate(60px, -40px);
+    }
+
+    50% {
+        transform: translate(60px, 0);
+    }
+
+    57% {
+        transform: translate(53px, -14px);
+    }
+
+    60% {
+        transform: translate(45px, -10px);
+    }
+
+    67% {
+        transform: translate(37px, -24px);
+    }
+
+    70% {
+        transform: translate(30px, -20px);
+    }
+
+    77% {
+        transform: translate(22px, -34px);
+    }
+
+    80% {
+        transform: translate(15px, -30px);
+    }
+
+    87% {
+        transform: translate(7px, -44px);
+    }
+
+    90% {
+        transform: translate(0, -40px);
+    }
+
+    100% {
+        transform: translate(0, 0);
+    }
 }
 
 /* Animações das barras */
 @keyframes barUp1 {
-    0%, 40% { transform: scale(1, 0.2); }
-    50%, 90% { transform: scale(1, 1); }
-    100% { transform: scale(1, 0.2); }
+
+    0%,
+    40% {
+        transform: scale(1, 0.2);
+    }
+
+    50%,
+    90% {
+        transform: scale(1, 1);
+    }
+
+    100% {
+        transform: scale(1, 0.2);
+    }
 }
 
 @keyframes barUp2 {
-    0%, 40% { transform: scale(1, 0.4); }
-    50%, 90% { transform: scale(1, 0.8); }
-    100% { transform: scale(1, 0.4); }
+
+    0%,
+    40% {
+        transform: scale(1, 0.4);
+    }
+
+    50%,
+    90% {
+        transform: scale(1, 0.8);
+    }
+
+    100% {
+        transform: scale(1, 0.4);
+    }
 }
 
 @keyframes barUp3 {
-    0%, 100% { transform: scale(1, 0.6); }
+
+    0%,
+    100% {
+        transform: scale(1, 0.6);
+    }
 }
 
 @keyframes barUp4 {
-    0%, 40% { transform: scale(1, 0.8); }
-    50%, 90% { transform: scale(1, 0.4); }
-    100% { transform: scale(1, 0.8); }
+
+    0%,
+    40% {
+        transform: scale(1, 0.8);
+    }
+
+    50%,
+    90% {
+        transform: scale(1, 0.4);
+    }
+
+    100% {
+        transform: scale(1, 0.8);
+    }
 }
 
 @keyframes barUp5 {
-    0%, 40% { transform: scale(1, 1); }
-    50%, 90% { transform: scale(1, 0.2); }
-    100% { transform: scale(1, 1); }
+
+    0%,
+    40% {
+        transform: scale(1, 1);
+    }
+
+    50%,
+    90% {
+        transform: scale(1, 0.2);
+    }
+
+    100% {
+        transform: scale(1, 1);
+    }
 }
 
 /* Compatibilidade com webkit */
 @-webkit-keyframes barUp1 {
-    0%, 40% { transform: scale(1, 0.2); }
-    50%, 90% { transform: scale(1, 1); }
-    100% { transform: scale(1, 0.2); }
+
+    0%,
+    40% {
+        transform: scale(1, 0.2);
+    }
+
+    50%,
+    90% {
+        transform: scale(1, 1);
+    }
+
+    100% {
+        transform: scale(1, 0.2);
+    }
 }
 
 @-webkit-keyframes barUp2 {
-    0%, 40% { transform: scale(1, 0.4); }
-    50%, 90% { transform: scale(1, 0.8); }
-    100% { transform: scale(1, 0.4); }
+
+    0%,
+    40% {
+        transform: scale(1, 0.4);
+    }
+
+    50%,
+    90% {
+        transform: scale(1, 0.8);
+    }
+
+    100% {
+        transform: scale(1, 0.4);
+    }
 }
 
 @-webkit-keyframes barUp3 {
-    0%, 100% { transform: scale(1, 0.6); }
+
+    0%,
+    100% {
+        transform: scale(1, 0.6);
+    }
 }
 
 @-webkit-keyframes barUp4 {
-    0%, 40% { transform: scale(1, 0.8); }
-    50%, 90% { transform: scale(1, 0.4); }
-    100% { transform: scale(1, 0.8); }
+
+    0%,
+    40% {
+        transform: scale(1, 0.8);
+    }
+
+    50%,
+    90% {
+        transform: scale(1, 0.4);
+    }
+
+    100% {
+        transform: scale(1, 0.8);
+    }
 }
 
 @-webkit-keyframes barUp5 {
-    0%, 40% { transform: scale(1, 1); }
-    50%, 90% { transform: scale(1, 0.2); }
-    100% { transform: scale(1, 1); }
+
+    0%,
+    40% {
+        transform: scale(1, 1);
+    }
+
+    50%,
+    90% {
+        transform: scale(1, 0.2);
+    }
+
+    100% {
+        transform: scale(1, 1);
+    }
 }
 </style>
 
@@ -2011,7 +2355,7 @@ document.addEventListener('DOMContentLoaded', () => {
     .hiddenTxt {
         display: show;
     }
-    
+
     .element-container .box {
         width: 50%;
         height: 50%;
