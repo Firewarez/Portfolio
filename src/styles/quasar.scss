@@ -1,0 +1,11 @@
+/* Import app variables first (Sass) */
+@import './quasar.variables.scss';
+
+/* Use Quasar's distributed CSS (precompiled) instead of Stylus sources.
+	The project is configured to use Sass, so importing Stylus sources
+	will fail. Importing the compiled CSS from the package avoids the
+	need to process Stylus. */
+@import 'quasar/dist/quasar.css';
+
+/* If you later switch to Stylus/custom Quasar build, replace the import
+	above with the appropriate Stylus pipeline imports. */
