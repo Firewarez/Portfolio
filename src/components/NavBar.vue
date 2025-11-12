@@ -122,7 +122,7 @@
     .bar-content-items-mobile i{
         font-size: 24px;
         font-weight: bold;
-        color: var(--main-font);
+        color: white;
         cursor: pointer;
     }
 }

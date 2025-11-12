@@ -38,7 +38,7 @@
             </g>
         </svg>
         <div class="about-content">
-            <div class="content-block block-left">
+            <div class="content-block block-main">
                 <div class="block-text">
                     <h1>FullStack Developer</h1>
                     <span>I like to develop solutions where people feel comfortable and safe</span>
@@ -69,16 +69,12 @@
                     </button>
                 </div>
             </div>
-            <div class="content-block block-right">
-                <img :src="meImage" alt="Image of Arthur Barcelos">
-            </div>
         </div>
     </section>
 </template>
 
 <script setup>
 import { ref } from 'vue';
-import meImage from '@/assets/me.png';
 
 const isDownloading = ref(false);
 
@@ -122,6 +118,8 @@ const handleDownload = () => {
     position: relative;
 }
 
+
+
 .svg-bg {
     width: 100%;
     height: 100%;
@@ -160,15 +158,17 @@ const handleDownload = () => {
     color: white;
 }
 
-.block-left {
+.block-main {
     flex: 1;
     padding-right: 40px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
 
-.block-right {
-    flex: 1;
-    display: flex;
-    justify-content: flex-end;
+.block-text {
+    text-align: center;
 }
 
 .block-text h1 {
@@ -197,6 +197,8 @@ const handleDownload = () => {
 .socials {
     display: flex;
     gap: 15px;
+    align-items: center;
+    justify-content: center;
 }
 
 .social-link {
@@ -245,7 +247,7 @@ const handleDownload = () => {
         padding-top: 120px;
     }
 
-    .block-left {
+    .block-main {
         padding-right: 0;
         margin-bottom: 40px;
     }
@@ -310,6 +312,9 @@ const handleDownload = () => {
     height: 50px;
     border-radius: 50%;
     margin-left: calc((125px - 50px) / 2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .botao.downloading .texto {
