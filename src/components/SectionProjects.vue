@@ -31,17 +31,17 @@
                 <div class="content">
                     <a href="#">
                         <span class="title">
-                            AcSocial
+                            UNPNews
                         </span>
                     </a>
 
                     <p class="desc">
-                        institutional website for an NGO dedicated to the social inclusion and rehabilitation of people
-                        with physical disabilities. The project involved structuring content, accessible design, and a
-                        focus on empathetic and functional communication.
+                        A news portal developed for a university, designed to keep students and faculty informed about
+                        campus events, academic achievements, and important announcements. The platform features a simple
+                        and intuitive interface for easy navigation. Users can post articles, comment, and share news.
                     </p>
 
-                    <a class="action" href="https://acmaisaudepravoce.com/" target="_blank" rel="noopener noreferrer">
+                    <a class="action" href="https://unpnews.com/" target="_blank" rel="noopener noreferrer">
                         Find out more
                         <span aria-hidden="true">
                             →

@@ -1,42 +1,6 @@
 <template>
-    <section class="Section-About-Me">
-        <svg class="svg-bg" xmlns='http://www.w3.org/2000/svg' viewBox='0 0 2000 1500'>
-            <rect fill='#000000' width='2000' height='1500' />
-            <defs>
-                <ellipse fill='none' stroke-width='200' stroke-opacity='0.13' id='a' rx='600' ry='450' />
-            </defs>
-            <g transform='' style='transform-origin:center'>
-                <g transform='' style='transform-origin:center'>
-                    <g transform='rotate(-160 0 0)' style='transform-origin:center'>
-                        <g transform='translate(1000 750)'>
-                            <use stroke='#27002B' href='#a' transform='rotate(-60 0 0) scale(0.4)' />
-                            <use stroke='#29032d' href='#a' transform='rotate(-50 0 0) scale(0.5)' />
-                            <use stroke='#2a052f' href='#a' transform='rotate(-40 0 0) scale(0.6)' />
-                            <use stroke='#2c0731' href='#a' transform='rotate(-30 0 0) scale(0.7)' />
-                            <use stroke='#2e0933' href='#a' transform='rotate(-20 0 0) scale(0.8)' />
-                            <use stroke='#300b36' href='#a' transform='rotate(-10 0 0) scale(0.9)' />
-                            <use stroke='#320d38' href='#a' transform='' />
-                            <use stroke='#34103a' href='#a' transform='rotate(10 0 0) scale(1.1)' />
-                            <use stroke='#36123c' href='#a' transform='rotate(20 0 0) scale(1.2)' />
-                            <use stroke='#38143e' href='#a' transform='rotate(30 0 0) scale(1.3)' />
-                            <use stroke='#3a1641' href='#a' transform='rotate(40 0 0) scale(1.4)' />
-                            <use stroke='#3b1843' href='#a' transform='rotate(50 0 0) scale(1.5)' />
-                            <use stroke='#3d1b45' href='#a' transform='rotate(60 0 0) scale(1.6)' />
-                            <use stroke='#3f1d47' href='#a' transform='rotate(70 0 0) scale(1.7)' />
-                            <use stroke='#411f4a' href='#a' transform='rotate(80 0 0) scale(1.8)' />
-                            <use stroke='#43214c' href='#a' transform='rotate(90 0 0) scale(1.9)' />
-                            <use stroke='#45234e' href='#a' transform='rotate(100 0 0) scale(2)' />
-                            <use stroke='#472550' href='#a' transform='rotate(110 0 0) scale(2.1)' />
-                            <use stroke='#492753' href='#a' transform='rotate(120 0 0) scale(2.2)' />
-                            <use stroke='#4b2a55' href='#a' transform='rotate(130 0 0) scale(2.3)' />
-                            <use stroke='#4d2c57' href='#a' transform='rotate(140 0 0) scale(2.4)' />
-                            <use stroke='#4f2e5a' href='#a' transform='rotate(150 0 0) scale(2.5)' />
-                            <use stroke='#51305C' href='#a' transform='rotate(160 0 0) scale(2.6)' />
-                        </g>
-                    </g>
-                </g>
-            </g>
-        </svg>
+    <section class="Section-About-Me" ref="vantaRef">
+
         <div class="about-content">
             <div class="content-block block-main">
                 <div class="block-text">
@@ -74,15 +38,49 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+// Lógica de Download (EXISTENTE)
+import { ref, onMounted, onUnmounted } from 'vue'; // 1. Importe os hooks
 
+// LÓGICA DO VANTA.JS (NOVA)
+import p5 from 'p5'; // 2. Importe o p5
+import TOPOLOGY from 'vanta/dist/vanta.topology.min'; // 3. Importe o efeito TOPOLOGY
+
+const vantaRef = ref(null); // 4. Crie a ref para a <section>
+let vantaEffect = null; // 5. Variável para guardar o efeito
+
+onMounted(() => {
+    // 6. Inicialize o Vanta quando o componente montar
+    vantaEffect = TOPOLOGY({
+        el: vantaRef.value, // Anexa à <section>
+        p5: p5, // Passa a dependência p5
+        mouseControls: true,
+        touchControls: true,
+        gyroControls: false,
+        minHeight: 200.00,
+        minWidth: 200.00,
+        scale: 1.00,
+        scaleMobile: 1.00,
+        // Cores do seu print!
+        color: 0x8e45af,
+        backgroundColor: 0x1e1322
+    });
+});
+
+onUnmounted(() => {
+    // 7. MUITO IMPORTANTE: Destrua o efeito ao sair da página
+    if (vantaEffect) {
+        vantaEffect.destroy();
+    }
+});
+
+
+// Lógica de Download (EXISTENTE)
 const isDownloading = ref(false);
 
 const handleDownload = () => {
     isDownloading.value = true;
-
     const link = document.createElement('a');
-    link.href = '/Curriculum Vitae.pdf'; // Agora aponta para public/
+    link.href = '/Curriculum Vitae.pdf';
     link.download = 'Curriculum_Vitae_Arthur_Barcelos.pdf';
 
     const handleVisibilityChange = () => {
@@ -93,7 +91,6 @@ const handleDownload = () => {
             }, 500);
         }
     };
-
     document.addEventListener('visibilitychange', handleVisibilityChange);
 
     document.body.appendChild(link);
@@ -112,35 +109,25 @@ const handleDownload = () => {
     z-index: 0;
     width: 100%;
     height: 100vh;
-    background-color: #000000;
+    /* Mudei o background-color para bater com o do Vanta.
+    Isso evita um "flash" preto antes do Vanta carregar.
+  */
+    background-color: #1e1322;
     background-size: cover;
     background-position: center;
     position: relative;
 }
 
 
+/* O .svg-bg e o @keyframes scaleSpin
+  foram REMOVIDOS daqui.
+*/
 
-.svg-bg {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    animation: scaleSpin 3s cubic-bezier(.4, 2, .3, 1) forwards;
-    transform-origin: center;
-}
-
-@keyframes scaleSpin {
-    0% {
-        transform: rotate(-160deg) scale(0.4);
-    }
-
-    100% {
-        transform: rotate(0deg) scale(1);
-    }
-}
 
 .about-content {
+    /* Isto está PERFEITO. O 'z-index: 1' e 'position: relative'
+    garantem que seu conteúdo flutue sobre o Vanta.
+  */
     z-index: 1;
     display: flex;
     justify-content: space-between;
@@ -154,6 +141,11 @@ const handleDownload = () => {
     box-sizing: border-box;
 }
 
+/* TODOS OS SEUS OUTROS ESTILOS (botão, social, etc.) 
+  CONTINUAM IGUAIS AQUI EMBAIXO.
+*/
+
+/* ... (seu .content-block, .block-main, .block-text, etc.) ... */
 .content-block {
     color: white;
 }
@@ -193,7 +185,6 @@ const handleDownload = () => {
     gap: 20px;
 }
 
-/* ÍCONES SOCIAIS */
 .socials {
     display: flex;
     gap: 15px;
@@ -239,7 +230,6 @@ const handleDownload = () => {
     object-fit: cover;
 }
 
-/* Responsivo */
 @media (max-width: 768px) {
     .about-content {
         flex-direction: column;
@@ -270,9 +260,8 @@ const handleDownload = () => {
 }
 </style>
 
-<!-- Estilo separado botão de download -->
 <style scoped>
-/* From Uiverse.io by Tsiangana/curly-rat-7 */
+/* ... (seu estilo do botão de download continua aqui, intocado) ... */
 .botao {
     position: relative;
     width: 125px;
@@ -306,7 +295,6 @@ const handleDownload = () => {
     display: inline;
 }
 
-/* MUDANÇA: :active para .downloading (classe JavaScript) */
 .botao.downloading {
     width: 50px;
     height: 50px;
