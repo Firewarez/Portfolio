@@ -3,7 +3,7 @@
         <h2>Projects</h2>
         <div class="my-projects flex">
             <div class="card">
-                <div class="image"></div>
+                <div class="image acsocial"></div>
                 <div class="content">
                     <a href="#">
                         <span class="title">
@@ -27,7 +27,7 @@
             </div>
 
             <div class="card">
-                <div class="image"></div>
+                <div class="image unpnews"></div>
                 <div class="content">
                     <a href="#">
                         <span class="title">
@@ -61,7 +61,7 @@
 .Section-Projects {
     min-height: 100vh;
     padding: 100px 20px 50px 20px;
-    background-color: #121212;
+    background-color: transparent;
     color: white;
     display: flex;
     flex-direction: column;
@@ -98,9 +98,16 @@
     width: 100%;
     height: 150px;
     background-color: rgb(239, 205, 255);
-    background-image: url('@/assets/acsaude.png');
     background-size: cover;
     border-radius: 0.5rem;
+}
+
+.image.acsocial {
+    background-image: url('@/assets/acsaude.png');
+}
+
+.image.unpnews {
+    background-image: url('@/assets/unpnews.png');
 }
 
 .title {

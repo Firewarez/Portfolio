@@ -1,5 +1,5 @@
 <template>
-    <section class="Section-About-Me" ref="vantaRef">
+    <section class="Section-About-Me">
 
         <div class="about-content">
             <div class="content-block block-main">
@@ -9,11 +9,16 @@
                 </div>
                 <div class="block-buttons">
                     <div class="socials">
-                        <a href="https://www.linkedin.com/in/arthurbarceloslucena/" class="social-link" target="_blank">
+                        <a href="https://www.linkedin.com/in/arthurbarceloslucena/" class="social-link linkedin"
+                            target="_blank">
                             <i class="bi bi-linkedin"></i>
                         </a>
-                        <a href="https://github.com/Firewarez" class="social-link" target="_blank">
+                        <a href="https://github.com/Firewarez" class="social-link github" target="_blank">
                             <i class="bi bi-github"></i>
+                        </a>
+                        <a href="https://www.instagram.com/arthurbarcelos1/" class="social-link instagram"
+                            target="_blank">
+                            <i class="bi bi-instagram"></i>
                         </a>
                     </div>
                     <button class="botao" :class="{ downloading: isDownloading }" @click="handleDownload">
@@ -38,43 +43,13 @@
 </template>
 
 <script setup>
-// Lógica de Download (EXISTENTE)
-import { ref, onMounted, onUnmounted } from 'vue'; // 1. Importe os hooks
 
-// LÓGICA DO VANTA.JS (NOVA)
-import p5 from 'p5'; // 2. Importe o p5
-import TOPOLOGY from 'vanta/dist/vanta.topology.min'; // 3. Importe o efeito TOPOLOGY
-
-const vantaRef = ref(null); // 4. Crie a ref para a <section>
-let vantaEffect = null; // 5. Variável para guardar o efeito
-
-onMounted(() => {
-    // 6. Inicialize o Vanta quando o componente montar
-    vantaEffect = TOPOLOGY({
-        el: vantaRef.value, // Anexa à <section>
-        p5: p5, // Passa a dependência p5
-        mouseControls: true,
-        touchControls: true,
-        gyroControls: false,
-        minHeight: 200.00,
-        minWidth: 200.00,
-        scale: 1.00,
-        scaleMobile: 1.00,
-        // Cores do seu print!
-        color: 0x8e45af,
-        backgroundColor: 0x1e1322
-    });
-});
-
-onUnmounted(() => {
-    // 7. MUITO IMPORTANTE: Destrua o efeito ao sair da página
-    if (vantaEffect) {
-        vantaEffect.destroy();
-    }
-});
+import { ref } from 'vue';
 
 
-// Lógica de Download (EXISTENTE)
+
+
+// Lógica Download 
 const isDownloading = ref(false);
 
 const handleDownload = () => {
@@ -109,10 +84,7 @@ const handleDownload = () => {
     z-index: 0;
     width: 100%;
     height: 100vh;
-    /* Mudei o background-color para bater com o do Vanta.
-    Isso evita um "flash" preto antes do Vanta carregar.
-  */
-    background-color: #1e1322;
+    background-color: transparent;
     background-size: cover;
     background-position: center;
     position: relative;
@@ -125,9 +97,6 @@ const handleDownload = () => {
 
 
 .about-content {
-    /* Isto está PERFEITO. O 'z-index: 1' e 'position: relative'
-    garantem que seu conteúdo flutue sobre o Vanta.
-  */
     z-index: 1;
     display: flex;
     justify-content: space-between;
@@ -141,11 +110,7 @@ const handleDownload = () => {
     box-sizing: border-box;
 }
 
-/* TODOS OS SEUS OUTROS ESTILOS (botão, social, etc.) 
-  CONTINUAM IGUAIS AQUI EMBAIXO.
-*/
 
-/* ... (seu .content-block, .block-main, .block-text, etc.) ... */
 .content-block {
     color: white;
 }
@@ -212,8 +177,21 @@ const handleDownload = () => {
     transition: all 0.3s ease;
 }
 
-.social-link:hover {
+.social-link.linkedin:hover {
     background: linear-gradient(160deg, rgba(47, 93, 197, 1) 0%, rgba(59, 190, 230, 1) 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(59, 190, 230, 0.4);
+}
+
+.social-link.github:hover {
+    background: linear-gradient(45deg, #6e5494, #24292e);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(59, 190, 230, 0.4);
+}
+
+.social-link.instagram:hover {
+    background: linear-gradient(to right,
+            #833ab4, #fd1d1d, #fcb045);
     transform: translateY(-3px);
     box-shadow: 0 5px 15px rgba(59, 190, 230, 0.4);
 }
@@ -261,7 +239,6 @@ const handleDownload = () => {
 </style>
 
 <style scoped>
-/* ... (seu estilo do botão de download continua aqui, intocado) ... */
 .botao {
     position: relative;
     width: 125px;

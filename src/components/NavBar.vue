@@ -12,15 +12,11 @@
                     :class="{ active: activeSection === 'about' }">
                     <span>Skills</span>
                 </button>
-                <button class="desktop-item" @click="scrollToSection('works')"
-                    :class="{ active: activeSection === 'works' }">
-                    <span>Jobs</span>
-                </button>
                 <button class="desktop-item" @click="scrollToSection('projects')"
                     :class="{ active: activeSection === 'projects' }">
                     <span>Projects</span>
                 </button>
-                <button class="desktop-item" @click="scrollToSection('contact')"
+                <button class="desktop-item" @click="menuStore.toggle()"
                     :class="{ active: activeSection === 'contact' }">
                     <span>Contact</span>
                 </button>
@@ -36,17 +32,12 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#works" class="mobile-item" @click.prevent="scrollToSection('works')">
-                                <span>Works</span>
-                            </a>
-                        </li>
-                        <li>
                             <a href="#projects" class="mobile-item" @click.prevent="scrollToSection('projects')">
                                 <span>Projects</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#contact" class="mobile-item" @click.prevent="scrollToSection('contact')">
+                            <a href="#contact" class="mobile-item" @click.prevent="menuStore.toggle()">
                                 <span>Contact</span>
                             </a>
                         </li>
@@ -65,7 +56,7 @@ const activeSection = ref('about');
 
 const dropdownVisible = ref(false);
 
-
+import { menuStore } from '../store.js'
 
 console.log(`                                      
                       ########                    
