@@ -37,11 +37,37 @@
 
                     <p class="desc">
                         A news portal developed for a university, designed to keep students and faculty informed about
-                        campus events, academic achievements, and important announcements. The platform features a simple
+                        campus events, academic achievements, and important announcements. The platform features a
+                        simple
                         and intuitive interface for easy navigation. Users can post articles, comment, and share news.
                     </p>
 
                     <a class="action" href="https://unpnews.com/" target="_blank" rel="noopener noreferrer">
+                        Find out more
+                        <span aria-hidden="true">
+                            →
+                        </span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="image multimobi"></div>
+                <div class="content">
+                    <a href="#">
+                        <span class="title">
+                            MultiMobi
+                        </span>
+                    </a>
+
+                    <p class="desc">
+                        An urban mobility application designed to provide users with real-time information on public
+                        transportation options, including bus routes, schedules, and traffic updates. The app aims to
+                        enhance the commuting experience by offering efficient route planning and promoting sustainable transportation choices.
+                    </p>
+
+                    <a class="action" href="https://multi-bus-develop.vercel.app/" target="_blank"
+                        rel="noopener noreferrer">
                         Find out more
                         <span aria-hidden="true">
                             →
@@ -108,6 +134,10 @@
 
 .image.unpnews {
     background-image: url('@/assets/unpnews.png');
+}
+
+.image.multimobi {
+    background-image: url('@/assets/multimobi.png');
 }
 
 .title {

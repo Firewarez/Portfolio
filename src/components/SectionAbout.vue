@@ -21,20 +21,11 @@
                             <i class="bi bi-instagram"></i>
                         </a>
                     </div>
-                    <button class="botao" :class="{ downloading: isDownloading }" @click="handleDownload">
-                        <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none"
-                            xmlns="http://www.w3.org/2000/svg" class="mysvg">
-                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                            <g id="SVGRepo_iconCarrier">
-                                <g id="Interface / Download">
-                                    <path id="Vector" d="M6 21H18M12 3V17M12 17L17 12M12 17L7 12" stroke="#f1f1f1"
-                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    </path>
-                                </g>
-                            </g>
-                        </svg>
-                        <span class="texto">Download CV</span>
+                    <button class="button" @click="handleDownload">
+                        <span class="button_lg">
+                            <span class="button_sl"></span>
+                            <span class="button_text">Download CV</span>
+                        </span>
                     </button>
                 </div>
             </div>
@@ -44,38 +35,19 @@
 
 <script setup>
 
-import { ref } from 'vue';
 
 
 
 
-// Lógica Download 
-const isDownloading = ref(false);
 
+// Lógica Download
 const handleDownload = () => {
-    isDownloading.value = true;
     const link = document.createElement('a');
     link.href = '/Curriculum Vitae.pdf';
     link.download = 'Curriculum_Vitae_Arthur_Barcelos.pdf';
-
-    const handleVisibilityChange = () => {
-        if (!document.hidden) {
-            setTimeout(() => {
-                isDownloading.value = false;
-                document.removeEventListener('visibilitychange', handleVisibilityChange);
-            }, 500);
-        }
-    };
-    document.addEventListener('visibilitychange', handleVisibilityChange);
-
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-
-    setTimeout(() => {
-        isDownloading.value = false;
-        document.removeEventListener('visibilitychange', handleVisibilityChange);
-    }, 3000);
 };
 </script>
 
@@ -239,78 +211,122 @@ const handleDownload = () => {
 </style>
 
 <style scoped>
-.botao {
-    position: relative;
-    width: 125px;
-    height: 45px;
-    border-radius: 20px;
+.button {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
     border: none;
-    box-shadow: 1px 1px rgba(107, 221, 215, 0.37);
-    padding: 5px 10px;
-    background: rgb(47, 93, 197);
-    background: linear-gradient(160deg, rgba(47, 93, 197, 1) 0%, rgba(46, 86, 194, 1) 5%, rgba(47, 93, 197, 1) 11%, rgba(59, 190, 230, 1) 57%, rgba(0, 212, 255, 1) 71%);
+    background: none;
     color: #fff;
-    font-family: Roboto, sans-serif;
-    font-weight: 505;
-    font-size: 16px;
-    line-height: 1;
     cursor: pointer;
-    filter: drop-shadow(0 0 10px rgba(59, 190, 230, 0.568));
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    margin: 0;
+    position: relative;
+    padding: 8px;
+    margin-bottom: 0;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 14px;
+    transition: all .15s ease;
 }
 
-.botao .mysvg {
-    display: none;
-}
-
-.botao .texto {
-    display: inline;
-}
-
-.botao.downloading {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    margin-left: calc((125px - 50px) / 2);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.botao.downloading .texto {
-    display: none;
-}
-
-.botao.downloading .mysvg {
-    display: inline;
-}
-
-.botao.downloading::before {
+.button::before,
+.button::after {
     content: '';
+    display: block;
     position: absolute;
-    top: -3px;
-    left: -3px;
-    width: calc(100% + 6px);
-    height: calc(100% + 6px);
-    border: 3.5px solid transparent;
-    border-top: 3.5px solid #fff;
-    border-right: 3.5px solid #fff;
-    border-radius: 50%;
-    animation: animateC 1s linear infinite;
+    right: 0;
+    left: 0;
+    height: calc(50% - 5px);
+    border: 1px solid #7D8082;
+    transition: all .15s ease;
 }
 
-@keyframes animateC {
-    0% {
-        transform: rotate(0deg);
-    }
+.button::before {
+    top: 0;
+    border-bottom-width: 0;
+}
 
-    100% {
-        transform: rotate(360deg);
-    }
+.button::after {
+    bottom: 0;
+    border-top-width: 0;
+}
+
+.button:active,
+.button:focus {
+    outline: none;
+}
+
+.button:active::before,
+.button:active::after {
+    right: 3px;
+    left: 3px;
+}
+
+.button:active::before {
+    top: 3px;
+}
+
+.button:active::after {
+    bottom: 3px;
+}
+
+.button_lg {
+    position: relative;
+    display: block;
+    padding: 10px 20px;
+    color: #fff;
+    background-color: #0f1923;
+    overflow: hidden;
+    box-shadow: inset 0px 0px 0px 1px transparent;
+}
+
+.button_lg::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 2px;
+    height: 2px;
+    background-color: #0f1923;
+}
+
+.button_lg::after {
+    content: '';
+    display: block;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 4px;
+    height: 4px;
+    background-color: #0f1923;
+    transition: all .2s ease;
+}
+
+.button_sl {
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: -1px;
+    left: -8px;
+    width: 0;
+    background-color: #3bbee6;
+    transform: skew(-15deg);
+    transition: all .2s ease;
+}
+
+.button_text {
+    position: relative;
+}
+
+.button:hover {
+    color: #0f1923;
+}
+
+.button:hover .button_sl {
+    width: calc(100% + 15px);
+}
+
+.button:hover .button_lg::after {
+    background-color: #fff;
 }
 </style>
