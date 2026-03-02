@@ -4,8 +4,8 @@
 
         <NavBar />
 
-        <section id="about">
-            <SectionAbout />
+        <section id="home">
+            <SectionHome />
         </section>
 
         <section id="projects">
@@ -14,6 +14,9 @@
 
         <ContactMe />
 
+        <section id="about">
+            <SectionAbout />
+        </section>
     </main>
 
 
@@ -23,41 +26,17 @@
 
 
 import NavBar from './NavBar.vue'
-import SectionAbout from './SectionAbout.vue'
+import SectionHome from './SectionHome.vue'
 import SectionProjects from './SectionProjects.vue'
+import SectionAbout from './SectionAbout.vue'
 import ContactMe from './ContactMe.vue'
 import 'bootstrap-icons/font/bootstrap-icons.css';
 //import iconImage from '@/assets/Icon.jpg';
 //import { useI18n } from 'vue-i18n';
 
-import { ref, onMounted, onUnmounted } from 'vue';
-import p5 from 'p5';
-import TOPOLOGY from 'vanta/dist/vanta.topology.min';
+import { ref } from 'vue';
 
 const vantaRef = ref(null);
-let vantaEffect = null;
-
-onMounted(() => {
-    vantaEffect = TOPOLOGY({
-        el: vantaRef.value, // Anexa à <section>
-        p5: p5,
-        mouseControls: true,
-        touchControls: true,
-        gyroControls: false,
-        minHeight: 200.00,
-        minWidth: 200.00,
-        scale: 1.00,
-        scaleMobile: 1.00,
-        color: 0x8e45af,
-        backgroundColor: 0x1e1322
-    });
-});
-
-onUnmounted(() => {
-    if (vantaEffect) {
-        vantaEffect.destroy();
-    }
-});
 
 
 </script>
@@ -66,6 +45,6 @@ onUnmounted(() => {
 .Main-Page {
     position: relative;
     min-height: 100vh;
+    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
 }
-
 </style>

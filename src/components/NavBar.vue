@@ -2,15 +2,15 @@
     <nav class="navbar-content">
         <div class="bar-content">
             <div class="bar-content-tittle">
-                <a href="#about" class="desktop-item" :class="{ active: activeSection === 'about' }"
-                    @click.prevent="scrollToSection('about')">
+                <a href="#home" class="desktop-item" :class="{ active: activeSection === 'home' }"
+                    @click.prevent="scrollToSection('home')">
                     <span class="desktop-item">Arthur Barcelos</span>
                 </a>
             </div>
             <div class="bar-content-items">
                 <button class="desktop-item" @click="scrollToSection('about')"
-                    :class="{ active: activeSection === 'about' }">
-                    <span>Skills</span>
+                    :class="{ active: activeSection === 'About' }">
+                    <span>About</span>
                 </button>
                 <button class="desktop-item" @click="scrollToSection('projects')"
                     :class="{ active: activeSection === 'projects' }">
@@ -23,21 +23,21 @@
             </div>
             <div class="bar-content-items-mobile">
                 <i class="bi bi-list" @click="toggleDropdown"></i>
-                <div class="bar-content-items-mobile-dropdown hide" id="bar-content-items-mobile-dropdown"
+                <div class="bar-content-items-mobile-dropdown" id="bar-content-items-mobile-dropdown"
                     v-if="dropdownVisible">
                     <ul>
                         <li>
-                            <a href="#about" class="mobile-item" @click.prevent="scrollToSection('about')">
-                                <span>Skills</span>
+                            <a href="#about" class="mobile-item" @click.prevent="scrollToSection('about'); closeDropdown()">
+                                <span>About</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#projects" class="mobile-item" @click.prevent="scrollToSection('projects')">
+                            <a href="#projects" class="mobile-item" @click.prevent="scrollToSection('projects'); closeDropdown()">
                                 <span>Projects</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#contact" class="mobile-item" @click.prevent="menuStore.toggle()">
+                            <a href="#contact" class="mobile-item" @click.prevent="menuStore.toggle(); closeDropdown()">
                                 <span>Contact</span>
                             </a>
                         </li>
@@ -55,6 +55,14 @@ import { ref, onMounted, onUnmounted } from 'vue';
 const activeSection = ref('about');
 
 const dropdownVisible = ref(false);
+
+const toggleDropdown = () => {
+    dropdownVisible.value = !dropdownVisible.value;
+};
+
+const closeDropdown = () => {
+    dropdownVisible.value = false;
+};
 
 import { menuStore } from '../store.js'
 
@@ -206,15 +214,52 @@ onUnmounted(() => {
     }
 
     .bar-content-items-mobile-dropdown {
-        display: none;
+        display: flex;
         position: absolute;
         top: 40px;
         right: 0;
-        background-color: var(--secondary-font);
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        border-radius: 4px;
+        background: rgba(30, 30, 30, 0.95);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 0.5rem;
         overflow: hidden;
         flex-direction: column;
+        min-width: 160px;
+        z-index: 1000;
+    }
+
+    .bar-content-items-mobile-dropdown ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .bar-content-items-mobile-dropdown li {
+        width: 100%;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    .bar-content-items-mobile-dropdown li:last-child {
+        border-bottom: none;
+    }
+
+    .bar-content-items-mobile-dropdown .mobile-item {
+        display: block;
+        padding: 12px 20px;
+        text-decoration: none;
+        color: #f3f4f6;
+        font-weight: 500;
+        font-size: 1.1rem;
+        transition: background-color 0.2s ease, color 0.2s ease;
+    }
+
+    .bar-content-items-mobile-dropdown .mobile-item:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        color: #ffffff;
     }
 
     .bar-content-items-mobile i {

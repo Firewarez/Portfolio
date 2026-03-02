@@ -12,10 +12,16 @@
                     </a>
 
                     <p class="desc">
-                        institutional website for an NGO dedicated to the social inclusion and rehabilitation of people
+                        Institutional website for an NGO dedicated to the social inclusion and rehabilitation of people
                         with physical disabilities. The project involved structuring content, accessible design, and a
                         focus on empathetic and functional communication.
                     </p>
+
+                    <div class="stack">
+                        <span class="tag">React</span>
+                        <span class="tag">Java</span>
+                        <span class="tag">CSS</span>
+                    </div>
 
                     <a class="action" href="https://acmaisaudepravoce.com/" target="_blank" rel="noopener noreferrer">
                         Find out more
@@ -38,9 +44,14 @@
                     <p class="desc">
                         A news portal developed for a university, designed to keep students and faculty informed about
                         campus events, academic achievements, and important announcements. The platform features a
-                        simple
-                        and intuitive interface for easy navigation. Users can post articles, comment, and share news.
+                        simple and intuitive interface for easy navigation. Users can post articles, comment, and share news.
                     </p>
+
+                    <div class="stack">
+                        <span class="tag">PHP</span>
+                        <span class="tag">MySQL</span>
+                        <span class="tag">Bootstrap</span>
+                    </div>
 
                     <a class="action" href="https://unpnews.com/" target="_blank" rel="noopener noreferrer">
                         Find out more
@@ -65,6 +76,14 @@
                         transportation options, including bus routes, schedules, and traffic updates. The app aims to
                         enhance the commuting experience by offering efficient route planning and promoting sustainable transportation choices.
                     </p>
+
+                    <div class="stack">
+                        <span class="tag">React</span>
+                        <span class="tag">Express</span>
+                        <span class="tag">React Native</span>
+                        <span class="tag">Firebase</span>
+                        <span class="tag">Google Maps API</span>
+                    </div>
 
                     <a class="action" href="https://multi-bus-develop.vercel.app/" target="_blank"
                         rel="noopener noreferrer">
@@ -99,16 +118,32 @@
     margin-top: 40px;
     gap: 40px;
     justify-content: center;
+    flex-wrap: wrap;
+    align-items: flex-start;
 }
 
 /* Card */
-/*  */
 .card {
-    max-width: 300px;
-    border-radius: 0.5rem;
-    background-color: #fff;
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-    border: 1px solid transparent;
+    max-width: 320px;
+    border-radius: 0.75rem;
+    background-color: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    will-change: transform, backdrop-filter;
+}
+
+.card:hover {
+    transform: translateY(-5px) translateZ(0); 
+    background-color: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
 }
 
 .card a {
@@ -116,16 +151,19 @@
 }
 
 .content {
-    padding: 1.1rem;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
 }
 
 .image {
     object-fit: cover;
     width: 100%;
-    height: 150px;
+    height: 180px;
     background-color: rgb(239, 205, 255);
     background-size: cover;
-    border-radius: 0.5rem;
+    background-position: center top;
 }
 
 .image.acsocial {
@@ -142,39 +180,65 @@
 
 .title {
     color: #111827;
-    font-size: 1.125rem;
+    font-size: 1.25rem;
     line-height: 1.75rem;
-    font-weight: 600;
+    font-weight: 700;
 }
 
 .desc {
-    margin-top: 0.5rem;
-    color: #6B7280;
-    font-size: 0.875rem;
-    line-height: 1.25rem;
+    margin-top: 0.75rem;
+    color: #4B5563;
+    font-size: 0.9rem;
+    line-height: 1.4rem;
+    flex-grow: 1;
+}
+
+.stack {
+    margin-top: 1.25rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.tag {
+    background-color: #F3F4F6;
+    color: #374151;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    transition: background-color 0.2s ease;
+}
+
+.tag:hover {
+    background-color: #E5E7EB;
 }
 
 .action {
     display: inline-flex;
-    margin-top: 1rem;
+    margin-top: 1.5rem;
     color: #ffffff;
-    font-size: 0.875rem;
-    line-height: 1.25rem;
-    font-weight: 500;
+    font-size: 0.9rem;
+    font-weight: 600;
     align-items: center;
-    gap: 0.25rem;
+    gap: 0.5rem;
     background-color: #2563EB;
-    padding: 4px 8px;
-    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+    width: fit-content;
+    transition: background-color 0.3s ease;
+}
+
+.action:hover {
+    background-color: #1D4ED8;
 }
 
 .action span {
-    transition: .3s ease;
+    transition: transform .3s ease;
 }
 
 .action:hover span {
     transform: translateX(4px);
 }
-
 /* End Card */
 </style>
