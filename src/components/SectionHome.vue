@@ -286,7 +286,7 @@ const handleDownload = () => {
 .scroll-indicator {
     position: absolute;
     bottom: 30px;
-    left: 50%;
+    left: 48.5%;
     transform: translateX(-50%);
     z-index: 10;
     display: flex;
