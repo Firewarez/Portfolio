@@ -15,6 +15,7 @@ var app = express();
 var allowedOrigins = [
   'http://localhost:8080',
   'http://localhost:8081',
+  'https://arthurbarcelosportfolio.netlify.app',
   process.env.FRONTEND_URL
 ].filter(Boolean);
 
