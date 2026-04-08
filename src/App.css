@@ -3,4 +3,32 @@
 :root{
     --main-font: white;
     --secondary-font: black;
+    --accent: #8B5DFF;
+    --accent-secondary: #3bbee6;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+::selection {
+    background: rgba(139, 93, 255, 0.3);
+    color: #fff;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: #0f0c29;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(139, 93, 255, 0.4);
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(139, 93, 255, 0.7);
 }

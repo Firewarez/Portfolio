@@ -13,11 +13,19 @@
 
       <div class="space-y-6 text-[1.05rem] md:text-lg text-gray-300 leading-relaxed font-light mt-4 w-full text-center">
         <p>
-          I'm currently pursuing a Bachelor's degree in Computer Science at <span class="font-medium text-white border-b-2 border-[#8B5DFF]/50 pb-0.5">Unipê University</span>. 1+ year building scalable applications using <span class="font-medium text-white border-b-2 border-[#8B5DFF]/50 pb-0.5">React</span>, <span class="font-medium text-white border-b-2 border-[#8B5DFF]/50 pb-0.5">Node.js Express.js</span>, <span class="font-medium text-white border-b-2 border-[#8B5DFF]/50 pb-0.5">Java</span> and <span class="font-medium text-white border-b-2 border-[#8B5DFF]/50 pb-0.5">PostgreSQL</span>. I'm deeply passionate about DevOps practices.
+          I'm currently pursuing a Bachelor's degree in Computer Science at <span class="font-medium text-white border-b-2 border-[#8B5DFF]/50 pb-0.5">Unipê University</span>. 2+ year building scalable applications using <span class="font-medium text-white border-b-2 border-[#8B5DFF]/50 pb-0.5">React</span>, <span class="font-medium text-white border-b-2 border-[#8B5DFF]/50 pb-0.5">Node.js Express.js</span>, <span class="font-medium text-white border-b-2 border-[#8B5DFF]/50 pb-0.5">Java</span> and <span class="font-medium text-white border-b-2 border-[#8B5DFF]/50 pb-0.5">PostgreSQL</span>. I'm deeply passionate about DevOps practices.
         </p>
         <p>
           With a creative mindset and natural leadership abilities, I enjoy challenging myself by creating new projects that put my skills to the test. I'm always looking for opportunities to grow and contribute to meaningful tech solutions.
         </p>
+      </div>
+
+      <!-- Stats Cards -->
+      <div class="stats-row">
+        <div class="stat-card" v-for="stat in stats" :key="stat.label">
+          <span class="stat-number">{{ stat.value }}</span>
+          <span class="stat-label">{{ stat.label }}</span>
+        </div>
       </div>
     </div>
 
@@ -51,9 +59,16 @@
 </template>
 
 <script setup>
+const stats = [
+  { value: '3+', label: 'Projects Delivered' },
+  { value: '2+', label: 'Year of Experience' },
+  { value: '10+', label: 'Technologies' },
+];
+
 const topRow = [
   { name: 'React', icon: 'bi-filetype-jsx', color: 'text-[#61DAFB]' },
   { name: 'Angular', icon: 'bi-google', color: 'text-[#DD0031]' },
+  { name: 'Vue.js', icon: 'bi-filetype-vue', color: 'text-[#42b883]' },
   { name: 'Express', icon: 'bi-server', color: 'text-gray-300' },
   { name: 'TypeScript', icon: 'bi-filetype-tsx', color: 'text-[#3178C6]' },
   { name: 'Java', icon: 'bi-cup-hot-fill', color: 'text-[#b07219]' },
@@ -68,11 +83,62 @@ const bottomRow = [
   { name: 'CSS3', icon: 'bi-filetype-css', color: 'text-[#1572B6]' },
   { name: 'Tailwind CSS', icon: 'bi-wind', color: 'text-[#38B2AC]' },
   { name: 'Firebase', icon: 'bi-fire', color: 'text-[#FFCA28]' },
-  { name: 'WordPress', icon: 'bi-wordpress', color: 'text-[#21759B]' }
+  { name: 'Docker', icon: 'bi-box-seam-fill', color: 'text-[#2496ED]' },
+  { name: 'Git', icon: 'bi-git', color: 'text-[#F05032]' }
 ];
 </script>
 
 <style scoped>
+/* Stats */
+.stats-row {
+  display: flex;
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.stat-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.25rem 2rem;
+  border-radius: 1rem;
+  background: rgba(139, 93, 255, 0.08);
+  border: 1px solid rgba(139, 93, 255, 0.15);
+  transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+  background: rgba(139, 93, 255, 0.15);
+  transform: translateY(-4px);
+}
+
+.stat-number {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #8B5DFF;
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  color: #9ca3af;
+  margin-top: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+@media (max-width: 640px) {
+  .stats-row {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .stat-card {
+    padding: 1rem 1.5rem;
+  }
+}
+
+/* Tech cards */
 .tech-card {
   display: flex;
   align-items: center;

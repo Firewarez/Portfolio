@@ -1,5 +1,5 @@
 <template>
-    <nav class="navbar-content">
+    <nav class="navbar-content" :class="{ scrolled: isScrolled }">
         <div class="bar-content">
             <div class="bar-content-tittle">
                 <a href="#home" class="desktop-item" :class="{ active: activeSection === 'home' }"
@@ -53,6 +53,7 @@
 import { ref, onMounted, onUnmounted } from 'vue';
 
 const activeSection = ref('about');
+const isScrolled = ref(false);
 
 const dropdownVisible = ref(false);
 
@@ -103,6 +104,8 @@ const scrollToSection = (sectionId) => {
 };
 
 const handleScroll = () => {
+    isScrolled.value = window.scrollY > 50;
+
     const sections = ['about', 'projects', 'contact'];
     const scrollPosition = window.scrollY + 150; // offset para detectar antes
 
@@ -133,12 +136,21 @@ onUnmounted(() => {
 .navbar-content {
     z-index: 999;
     width: 100%;
-    height: 100px;
+    height: 80px;
     position: fixed;
     background-color: transparent;
     align-items: center;
     padding: 0 20px;
-    /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+    transition: all 0.3s ease;
+}
+
+.navbar-content.scrolled {
+    background: rgba(15, 12, 41, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    height: 70px;
 }
 
 .bar-content {

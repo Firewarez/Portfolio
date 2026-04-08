@@ -4,20 +4,26 @@
         <div class="about-content">
             <div class="content-block block-main">
                 <div class="block-text">
-                    <h1>FullStack Developer</h1>
-                    <span>I like to develop solutions where people feel comfortable and safe</span>
+                    <span class="greeting">Hi, I'm</span>
+                    <h1 class="name-gradient">Arthur Barcelos</h1>
+                    <div class="typing-wrapper">
+                        <span class="typing-text">{{ displayedRole }}</span>
+                        <span class="cursor">|</span>
+                    </div>
+                    <p class="tagline">Building digital experiences that people trust & love</p>
                 </div>
                 <div class="block-buttons">
                     <div class="socials">
                         <a href="https://www.linkedin.com/in/arthurbarceloslucena/" class="social-link linkedin"
-                            target="_blank">
+                            target="_blank" aria-label="LinkedIn">
                             <i class="bi bi-linkedin"></i>
                         </a>
-                        <a href="https://github.com/Firewarez" class="social-link github" target="_blank">
+                        <a href="https://github.com/Firewarez" class="social-link github" target="_blank"
+                            aria-label="GitHub">
                             <i class="bi bi-github"></i>
                         </a>
                         <a href="https://www.instagram.com/arthurbarcelos1/" class="social-link instagram"
-                            target="_blank">
+                            target="_blank" aria-label="Instagram">
                             <i class="bi bi-instagram"></i>
                         </a>
                     </div>
@@ -30,15 +36,58 @@
                 </div>
             </div>
         </div>
+
+        <div class="scroll-indicator" @click="scrollToProjects">
+            <span>Scroll</span>
+            <i class="bi bi-chevron-double-down"></i>
+        </div>
     </section>
 </template>
 
 <script setup>
+import { ref, onMounted, onUnmounted } from 'vue';
 
+const roles = ['FullStack Developer', 'UI/UX Enthusiast', 'AI Passionate', 'Problem Solver'];
+const displayedRole = ref('');
+let roleIndex = 0;
+let charIndex = 0;
+let isDeleting = false;
+let typingTimer = null;
 
+const typeEffect = () => {
+    const currentRole = roles[roleIndex];
 
+    if (!isDeleting) {
+        displayedRole.value = currentRole.substring(0, charIndex + 1);
+        charIndex++;
+        if (charIndex === currentRole.length) {
+            isDeleting = true;
+            typingTimer = setTimeout(typeEffect, 2000);
+            return;
+        }
+    } else {
+        displayedRole.value = currentRole.substring(0, charIndex - 1);
+        charIndex--;
+        if (charIndex === 0) {
+            isDeleting = false;
+            roleIndex = (roleIndex + 1) % roles.length;
+        }
+    }
+    typingTimer = setTimeout(typeEffect, isDeleting ? 40 : 80);
+};
 
+onMounted(() => {
+    typeEffect();
+});
 
+onUnmounted(() => {
+    clearTimeout(typingTimer);
+});
+
+const scrollToProjects = () => {
+    const el = document.getElementById('projects');
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+};
 
 // Lógica Download
 const handleDownload = () => {
@@ -60,36 +109,28 @@ const handleDownload = () => {
     background-size: cover;
     background-position: center;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
-
-
-/* O .svg-bg e o @keyframes scaleSpin
-  foram REMOVIDOS daqui.
-*/
-
 
 .about-content {
     z-index: 1;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    position: relative;
     width: 100%;
     max-width: 90%;
-    height: 90%;
-    margin: 0 auto;
-    padding-top: 100px;
     box-sizing: border-box;
 }
-
 
 .content-block {
     color: white;
 }
 
 .block-main {
-    flex: 1;
-    padding-right: 40px;
+    width: 100%;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -100,26 +141,96 @@ const handleDownload = () => {
     text-align: center;
 }
 
-.block-text h1 {
-    font-size: 48px;
-    font-weight: bold;
-    margin: 0;
-    line-height: 1.2;
+.greeting {
+    font-size: 20px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.6);
+    letter-spacing: 2px;
+    margin-right: -2px;
+    /* Correção: Compensa o espaço extra gerado pelo letter-spacing */
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 8px;
+    animation: fadeInUp 0.8s ease forwards;
 }
 
-.block-text span {
-    font-size: 24px;
-    font-weight: 400;
-    opacity: 0.9;
-    display: block;
+.name-gradient {
+    font-size: 56px;
+    font-weight: 800;
+    margin: 0;
+    line-height: 1.1;
+    background: linear-gradient(135deg, #ffffff 0%, #8B5DFF 50%, #3bbee6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: fadeInUp 0.8s 0.2s ease both;
+}
+
+.typing-wrapper {
     margin-top: 16px;
+    font-size: 24px;
+    font-weight: 500;
+    color: #8B5DFF;
+    min-height: 36px;
+    animation: fadeInUp 0.8s 0.4s ease both;
+    display: inline-flex;
+    /* Correção: Abraça exatamente o tamanho do texto */
+    align-items: center;
+    position: relative;
+    /* Correção: Serve de base para o cursor absoluto */
+}
+
+.typing-text {
+    font-weight: 600;
+}
+
+.cursor {
+    animation: blink 1s step-end infinite;
+    color: #8B5DFF;
+    position: absolute;
+    /* Correção: Tira o cursor do fluxo visual, centralizando o texto real */
+    right: -12px;
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
+
+.tagline {
+    font-size: 17px;
+    font-weight: 300;
+    opacity: 0.7;
+    display: block;
+    margin-top: 20px;
+    letter-spacing: 0.3px;
+    margin-right: -0.3px;
+    /* Correção de margem proporcional ao letter-spacing */
+    line-height: 1.5;
+    animation: fadeInUp 0.8s 0.6s ease both;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .block-buttons {
     margin-top: 40px;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    /* Correção: Força o botão e as redes sociais a dividirem o mesmo eixo central */
     gap: 20px;
+    animation: fadeInUp 0.8s 0.8s ease both;
 }
 
 .socials {
@@ -158,26 +269,63 @@ const handleDownload = () => {
 .social-link.github:hover {
     background: linear-gradient(45deg, #6e5494, #24292e);
     transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(59, 190, 230, 0.4);
+    box-shadow: 0 5px 15px rgba(110, 84, 148, 0.4);
 }
 
 .social-link.instagram:hover {
-    background: linear-gradient(to right,
-            #833ab4, #fd1d1d, #fcb045);
+    background: linear-gradient(to right, #833ab4, #fd1d1d, #fcb045);
     transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(59, 190, 230, 0.4);
+    box-shadow: 0 5px 15px rgba(131, 58, 180, 0.4);
 }
 
 .social-link:hover i {
     transform: scale(1.1);
 }
 
-.block-right img {
-    max-width: 400px;
-    width: 100%;
-    height: auto;
-    border-radius: 12px;
-    object-fit: cover;
+/* Scroll indicator */
+.scroll-indicator {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    color: rgba(255, 255, 255, 0.4);
+    cursor: pointer;
+    transition: color 0.3s ease;
+    animation: fadeInUp 1s 1.2s ease both;
+}
+
+.scroll-indicator:hover {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.scroll-indicator span {
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin-right: -2px;
+    /* Correção: Anula o desvio provocado pelo letter-spacing */
+    text-transform: uppercase;
+}
+
+.scroll-indicator i {
+    font-size: 18px;
+    animation: bounceDown 2s ease infinite;
+}
+
+@keyframes bounceDown {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(8px);
+    }
 }
 
 @media (max-width: 768px) {
@@ -192,25 +340,24 @@ const handleDownload = () => {
         margin-bottom: 40px;
     }
 
-    .block-right {
-        justify-content: center;
-    }
-
-    .block-text h1 {
+    .name-gradient {
         font-size: 36px;
     }
 
-    .block-text span {
+    .typing-wrapper {
         font-size: 18px;
     }
 
     .block-buttons {
         justify-content: center;
     }
-}
-</style>
 
-<style scoped>
+    .scroll-indicator {
+        bottom: 20px;
+    }
+}
+
+/* Button Estilos */
 .button {
     -moz-appearance: none;
     -webkit-appearance: none;

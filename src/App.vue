@@ -6,8 +6,12 @@
 
 import MainPage from './components/MainPage.vue'
 import 'bootstrap-icons/font/bootstrap-icons.css'
+import { trackPageView } from './analytics.js'
+import { onMounted } from 'vue'
 
-
+onMounted(() => {
+    trackPageView(window.location.pathname)
+})
 
 </script>
 

@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Dashboard</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0a1a;
+            color: #e5e7eb;
+            min-height: 100vh;
+        }
+
+        .dashboard {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 40px 24px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #fff, #8B5DFF);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header-right { display: flex; align-items: center; gap: 16px; }
+
+        .refresh-btn {
+            background: rgba(139, 93, 255, 0.15);
+            border: 1px solid rgba(139, 93, 255, 0.3);
+            color: #8B5DFF;
+            padding: 8px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .refresh-btn:hover { background: rgba(139, 93, 255, 0.25); }
+
+        .last-updated { font-size: 0.8rem; color: #6b7280; }
+
+        /* Stats grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 16px;
+            padding: 20px;
+            transition: all 0.3s;
+        }
+
+        .stat-card:hover {
+            background: rgba(255, 255, 255, 0.06);
+            transform: translateY(-2px);
+        }
+
+        .stat-card .label {
+            font-size: 0.75rem;
+            color: #9ca3af;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 6px;
+        }
+
+        .stat-card .value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #fff;
+        }
+
+        .stat-card .value.purple { color: #8B5DFF; }
+        .stat-card .value.blue { color: #3bbee6; }
+        .stat-card .value.green { color: #34d399; }
+        .stat-card .value.amber { color: #fbbf24; }
+        .stat-card .value.rose { color: #f472b6; }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 24px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+            padding: 4px;
+            width: fit-content;
+        }
+
+        .tab {
+            padding: 8px 20px;
+            border-radius: 8px;
+            border: none;
+            background: transparent;
+            color: #9ca3af;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .tab.active { background: rgba(139, 93, 255, 0.2); color: #8B5DFF; }
+        .tab:hover:not(.active) { color: #d1d5db; }
+
+        /* Chart */
+        .chart-panel {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+
+        .chart-panel h3 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #9ca3af;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .chart-container {
+            display: flex;
+            align-items: flex-end;
+            gap: 6px;
+            height: 140px;
+            padding-top: 10px;
+        }
+
+        .chart-bar-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100%;
+            justify-content: flex-end;
+        }
+
+        .chart-bar {
+            width: 100%;
+            max-width: 48px;
+            border-radius: 6px 6px 0 0;
+            background: linear-gradient(180deg, #8B5DFF, #6336cc);
+            transition: height 0.6s ease;
+            min-height: 2px;
+        }
+
+        .chart-bar:hover { opacity: 0.8; }
+
+        .chart-bar-count {
+            font-size: 0.65rem;
+            color: #9ca3af;
+            margin-bottom: 4px;
+            font-weight: 600;
+        }
+
+        .chart-label {
+            font-size: 0.65rem;
+            color: #6b7280;
+            margin-top: 8px;
+            text-align: center;
+        }
+
+        /* Panels */
+        .panels-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 24px;
+        }
+
+        .panel {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 16px;
+            padding: 24px;
+        }
+
+        .panel h3 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #9ca3af;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Bar chart rows */
+        .bar-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+
+        .bar-label {
+            width: 80px;
+            font-size: 0.8rem;
+            color: #d1d5db;
+            text-align: right;
+            flex-shrink: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .bar-track {
+            flex: 1;
+            height: 26px;
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 6px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .bar-fill {
+            height: 100%;
+            border-radius: 6px;
+            transition: width 0.6s ease;
+            min-width: 2px;
+        }
+
+        .bar-fill.purple { background: linear-gradient(90deg, #8B5DFF, #a78bfa); }
+        .bar-fill.blue { background: linear-gradient(90deg, #3bbee6, #60a5fa); }
+        .bar-fill.green { background: linear-gradient(90deg, #34d399, #6ee7b7); }
+        .bar-fill.amber { background: linear-gradient(90deg, #fbbf24, #fcd34d); }
+        .bar-fill.rose { background: linear-gradient(90deg, #f472b6, #fb7185); }
+        .bar-fill.cyan { background: linear-gradient(90deg, #22d3ee, #67e8f9); }
+
+        .bar-count {
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Messages table */
+        .messages-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .messages-table th {
+            text-align: left;
+            font-size: 0.75rem;
+            color: #6b7280;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 8px 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .messages-table td {
+            padding: 12px;
+            font-size: 0.85rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            color: #d1d5db;
+        }
+
+        .messages-table tr:hover td { background: rgba(255, 255, 255, 0.02); }
+
+        .msg-name { font-weight: 600; color: #fff; }
+        .msg-email { color: #8B5DFF; }
+        .msg-date { color: #6b7280; font-size: 0.8rem; white-space: nowrap; }
+        .msg-text {
+            max-width: 400px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: #6b7280;
+            font-size: 0.9rem;
+        }
+
+        .msg-count-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(139, 93, 255, 0.15);
+            color: #8B5DFF;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .panels-grid { grid-template-columns: 1fr; }
+            .chart-container { height: 100px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <div class="header">
+            <div>
+                <h1>Portfolio Analytics</h1>
+                <span class="last-updated" id="lastUpdated"></span>
+            </div>
+            <div class="header-right">
+                <button class="refresh-btn" onclick="loadAll()">&#8635; Refresh</button>
+            </div>
+        </div>
+
+        <div class="tabs">
+            <button class="tab active" onclick="switchTab('analytics', this)">Analytics</button>
+            <button class="tab" onclick="switchTab('messages', this)">Messages <span id="msgBadge" class="msg-count-badge" style="display:none">0</span></button>
+        </div>
+
+        <!-- Analytics Tab -->
+        <div id="tab-analytics">
+            <div class="stats-grid">
+                <div class="stat-card"><div class="label">Today</div><div class="value rose" id="todayViews">-</div></div>
+                <div class="stat-card"><div class="label">Last 7 Days</div><div class="value green" id="last7Views">-</div></div>
+                <div class="stat-card"><div class="label">Last 30 Days</div><div class="value blue" id="last30Views">-</div></div>
+                <div class="stat-card"><div class="label">Total Views</div><div class="value purple" id="totalViews">-</div></div>
+                <div class="stat-card"><div class="label">Unique Sessions</div><div class="value amber" id="uniqueSessions">-</div></div>
+            </div>
+
+            <!-- Daily chart -->
+            <div class="chart-panel">
+                <h3>Views &mdash; Last 14 Days</h3>
+                <div class="chart-container" id="dailyChart">
+                    <div class="empty-state">No data yet</div>
+                </div>
+            </div>
+
+            <!-- Breakdown panels row 1 -->
+            <div class="panels-grid">
+                <div class="panel">
+                    <h3>Top Pages</h3>
+                    <div id="topPages"><div class="empty-state">No data yet</div></div>
+                </div>
+                <div class="panel">
+                    <h3>Browsers</h3>
+                    <div id="browsers"><div class="empty-state">No data yet</div></div>
+                </div>
+                <div class="panel">
+                    <h3>Devices</h3>
+                    <div id="devices"><div class="empty-state">No data yet</div></div>
+                </div>
+            </div>
+
+            <!-- Breakdown panels row 2 -->
+            <div class="panels-grid">
+                <div class="panel">
+                    <h3>Operating Systems</h3>
+                    <div id="osSystems"><div class="empty-state">No data yet</div></div>
+                </div>
+                <div class="panel">
+                    <h3>Languages</h3>
+                    <div id="languages"><div class="empty-state">No data yet</div></div>
+                </div>
+                <div class="panel">
+                    <h3>Referrers</h3>
+                    <div id="referrers"><div class="empty-state">No data yet</div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Messages Tab -->
+        <div id="tab-messages" style="display: none;">
+            <div class="panel">
+                <h3>Contact Messages</h3>
+                <div id="messagesContainer"><div class="empty-state">No messages yet</div></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var API = window.location.origin;
+
+        function switchTab(tab, el) {
+            document.querySelectorAll('.tab').forEach(function(t) { t.classList.remove('active'); });
+            el.classList.add('active');
+            document.getElementById('tab-analytics').style.display = tab === 'analytics' ? 'block' : 'none';
+            document.getElementById('tab-messages').style.display = tab === 'messages' ? 'block' : 'none';
+        }
+
+        function escapeHtml(str) {
+            var div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML;
+        }
+
+        function renderBars(containerId, items, colorClass) {
+            var container = document.getElementById(containerId);
+            if (!items || items.length === 0) {
+                container.innerHTML = '<div class="empty-state">No data yet</div>';
+                return;
+            }
+            var max = Math.max.apply(null, items.map(function(i) { return i.count || i.views || 0; }));
+            container.innerHTML = items.map(function(item) {
+                var val = item.count || item.views || 0;
+                var pct = max > 0 ? (val / max * 100) : 0;
+                var label = item.name || item.path || 'unknown';
+                return '<div class="bar-row">' +
+                    '<span class="bar-label" title="' + escapeHtml(label) + '">' + escapeHtml(label) + '</span>' +
+                    '<div class="bar-track"><div class="bar-fill ' + colorClass + '" style="width:' + pct + '%"></div>' +
+                    '<span class="bar-count">' + val + '</span></div></div>';
+            }).join('');
+        }
+
+        function renderDailyChart(dailyViews) {
+            var container = document.getElementById('dailyChart');
+            if (!dailyViews || dailyViews.length === 0) {
+                container.innerHTML = '<div class="empty-state">No data yet</div>';
+                return;
+            }
+            var max = Math.max.apply(null, dailyViews.map(function(d) { return d.views; }));
+            if (max === 0) max = 1;
+            container.innerHTML = dailyViews.map(function(d) {
+                var pct = (d.views / max * 100);
+                var dayLabel = d.date.slice(5); // MM-DD
+                return '<div class="chart-bar-wrapper">' +
+                    '<span class="chart-bar-count">' + (d.views || '') + '</span>' +
+                    '<div class="chart-bar" style="height:' + Math.max(pct, 3) + '%" title="' + d.date + ': ' + d.views + ' views"></div>' +
+                    '<span class="chart-label">' + dayLabel + '</span></div>';
+            }).join('');
+        }
+
+        function formatDate(iso) {
+            var d = new Date(iso);
+            return d.toLocaleDateString('pt-BR') + ' ' + d.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+        }
+
+        async function loadAnalytics() {
+            try {
+                var res = await fetch(API + '/api/analytics/summary');
+                var data = await res.json();
+                document.getElementById('totalViews').textContent = data.totalViews;
+                document.getElementById('last30Views').textContent = data.last30Views;
+                document.getElementById('last7Views').textContent = data.last7Views;
+                document.getElementById('todayViews').textContent = data.todayViews;
+                document.getElementById('uniqueSessions').textContent = data.uniqueSessions;
+
+                renderDailyChart(data.dailyViews);
+                renderBars('topPages', data.topPages, 'purple');
+                renderBars('browsers', data.browsers, 'blue');
+                renderBars('devices', data.devices, 'green');
+                renderBars('osSystems', data.osSystems, 'amber');
+                renderBars('languages', data.languages, 'cyan');
+                renderBars('referrers', data.referrers, 'rose');
+            } catch (e) {
+                console.error('Failed to load analytics:', e);
+            }
+        }
+
+        async function loadMessages() {
+            try {
+                var res = await fetch(API + '/api/contact');
+                var messages = await res.json();
+                var badge = document.getElementById('msgBadge');
+                var container = document.getElementById('messagesContainer');
+
+                if (!messages || messages.length === 0) {
+                    container.innerHTML = '<div class="empty-state">No messages yet</div>';
+                    badge.style.display = 'none';
+                    return;
+                }
+
+                badge.textContent = messages.length;
+                badge.style.display = 'inline-flex';
+
+                container.innerHTML = '<table class="messages-table"><thead><tr>' +
+                    '<th>Name</th><th>Email</th><th>Message</th><th>Date</th></tr></thead><tbody>' +
+                    messages.map(function(m) {
+                        return '<tr><td class="msg-name">' + escapeHtml(m.name) + '</td>' +
+                            '<td class="msg-email">' + escapeHtml(m.email) + '</td>' +
+                            '<td class="msg-text" title="' + escapeHtml(m.message) + '">' + escapeHtml(m.message) + '</td>' +
+                            '<td class="msg-date">' + formatDate(m.createdAt) + '</td></tr>';
+                    }).join('') + '</tbody></table>';
+            } catch (e) {
+                console.error('Failed to load messages:', e);
+            }
+        }
+
+        function loadAll() {
+            loadAnalytics();
+            loadMessages();
+            document.getElementById('lastUpdated').textContent = 'Updated: ' + new Date().toLocaleTimeString('pt-BR');
+        }
+
+        loadAll();
+        setInterval(loadAll, 30000);
+    </script>
+</body>
+</html>

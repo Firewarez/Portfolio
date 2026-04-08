@@ -17,20 +17,24 @@
       <div class="contact-content">
         <div class="input-group">
           <label for="name" class="contact-label">Name</label>
-          <input type="text" id="name" class="contact-input" placeholder="John Doe">
+          <input type="text" id="name" class="contact-input" placeholder="John Doe" v-model="name">
         </div>
 
         <div class="input-group">
           <label for="email" class="contact-label">Email</label>
-          <input type="email" id="email" class="contact-input" placeholder="john@example.com">
+          <input type="email" id="email" class="contact-input" placeholder="john@example.com" v-model="email">
         </div>
 
         <div class="input-group">
           <label for="message" class="contact-label">Message</label>
-          <textarea id="message" class="contact-input textarea" placeholder="How can I help you?" rows="4"></textarea>
+          <textarea id="message" class="contact-input textarea" placeholder="How can I help you?" rows="4" v-model="message"></textarea>
         </div>
         
-        <button class="submit-btn">Send Message</button>
+        <p v-if="error" class="error-msg">{{ error }}</p>
+        <p v-if="sent" class="success-msg">Message sent successfully!</p>
+        <button class="submit-btn" @click="handleSubmit" :disabled="sending">
+          {{ sending ? 'Sending...' : 'Send Message' }}
+        </button>
 
         <div class="divider">
           <span>Or connect via</span>
@@ -48,7 +52,50 @@
 </template>
 
 <script setup>
+import { ref } from 'vue'
 import { menuStore } from '../store.js'
+
+const name = ref('')
+const email = ref('')
+const message = ref('')
+const sending = ref(false)
+const sent = ref(false)
+const error = ref('')
+
+const API_URL = process.env.VUE_APP_API_URL || 'http://localhost:3001'
+
+const handleSubmit = async () => {
+    if (!name.value || !email.value || !message.value) {
+        error.value = 'Please fill in all fields'
+        return
+    }
+    error.value = ''
+    sending.value = true
+    try {
+        const res = await fetch(`${API_URL}/api/contact`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                name: name.value,
+                email: email.value,
+                message: message.value
+            })
+        })
+        if (res.ok) {
+            sent.value = true
+            name.value = ''
+            email.value = ''
+            message.value = ''
+            setTimeout(() => { sent.value = false }, 4000)
+        } else {
+            error.value = 'Failed to send. Try again later.'
+        }
+    } catch {
+        error.value = 'Network error. Try again later.'
+    } finally {
+        sending.value = false
+    }
+}
 </script>
 
 <style scoped>
@@ -184,6 +231,24 @@ import { menuStore } from '../store.js'
   background: #2563eb;
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+.submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.error-msg {
+  color: #f87171;
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.success-msg {
+  color: #34d399;
+  font-size: 0.85rem;
+  margin: 0;
 }
 
 .divider {
