@@ -1,4 +1,4 @@
-const API_URL = process.env.VUE_APP_API_URL || 'http://localhost:3001';
+const API_URL = process.env.VUE_APP_API_URL || 'https://portfolio-h0j5.onrender.com';
 
 function getSessionId() {
   var key = 'portfolio_sid';

@@ -62,7 +62,7 @@ const sending = ref(false)
 const sent = ref(false)
 const error = ref('')
 
-const API_URL = process.env.VUE_APP_API_URL || 'http://localhost:3001'
+const API_URL = process.env.VUE_APP_API_URL || 'https://portfolio-h0j5.onrender.com'
 
 const handleSubmit = async () => {
     if (!name.value || !email.value || !message.value) {
