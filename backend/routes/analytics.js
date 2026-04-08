@@ -123,7 +123,7 @@ router.get('/summary', async function (req, res) {
     });
   } catch (err) {
     console.error('Summary error:', err);
-    res.status(500).json({ error: 'Failed to fetch summary', detail: err.message });
+    res.status(500).json({ error: 'Failed to fetch summary' });
   }
 });
 
